@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using learnit_backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace learnit_backend.Models;
+namespace learnit_backend.Data;
 
 public partial class LearnitDbContext : DbContext
 {
