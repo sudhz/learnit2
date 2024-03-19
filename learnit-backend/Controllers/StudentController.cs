@@ -35,7 +35,7 @@ namespace learnit_backend.Controllers
 
             _context.Entry(student).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            Console.WriteLine(student.Name.ToString());
+            Console.WriteLine(student.StudentName.ToString());
             return NoContent();
         }
 
