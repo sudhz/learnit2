@@ -47,14 +47,37 @@ const App: React.FC = () => {
         </Box>
       </header>
       <main>
-        <Box
-          sx={{
-            marginTop: 10,
-            marginLeft: { xs: 1, sm: 2, md: 10, lg: 10 },
-            marginRight: { xs: 1, sm: 2, md: 10, lg: 10 },
-          }}
-        >
-          <Outlet />
+        <Box height="100%" pt={3} sx={{ display: "flex" }}>
+          {location.pathname.startsWith("/student/home") && (
+            <Box
+              width="20%"
+              padding={2}
+              height={710}
+              sx={{ bgcolor: "#1976d2" }}
+            >
+              <Stack spacing={2} mt={5}>
+                <Typography
+                  variant="h5"
+                  component={Link}
+                  sx={{ color: "white", textDecoration: "none" }}
+                  to="/student/home/courses"
+                >
+                  My Courses
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component={Link}
+                  sx={{ color: "white", textDecoration: "none" }}
+                  to="/student/video"
+                >
+                  Play Course
+                </Typography>
+              </Stack>
+            </Box>
+          )}
+          <Box sx={{ flexGrow: 1, padding: 2 }}>
+            <Outlet />
+          </Box>
         </Box>
       </main>
       <footer>
