@@ -13,5 +13,7 @@ public partial class Module
 
     public virtual ICollection<Lecture> Lectures { get; set; } = new List<Lecture>();
 
+    public virtual ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
+
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }
