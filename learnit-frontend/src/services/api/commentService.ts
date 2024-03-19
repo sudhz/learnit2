@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import CourseDiscussion from "../../components/CourseDiscussion";
+
 
 export const AddComment = async (comment: Comment): Promise<Comment> => {
  try {
