@@ -1,41 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
 
-namespace learnit_backend.Models // Adjust the namespace according to your project structure
+namespace learnit_backend.Models;
+
+public partial class Student
 {
-    public class Student
-    {
+    public int StudentId { get; set; }
 
-        // private string _password;
-        // Primary key
-        public int StudentId { get; set; }
+    public string StudentName { get; set; } = null!;
 
-        // Column name will be "name" in the database
-        [Column("student_name")]
-        public required string Name { get; set; }
+    public string Email { get; set; } = null!;
 
-        // Column name will be "email" in the database
-        [Column("email")]
-        public required string Email { get; set; }
+    public string? Phone { get; set; }
 
-        // Column name will be "phone" in the database
-        [Column("phone")]
-        public required string Phone { get; set; }
+    public string Password { get; set; } = null!;
 
-        // Column name will be "password" in the database
-        [Column("password")]
-        public required string Password {get; set;}
-        
-        public virtual ICollection<Course> Courses { get; set; } = [];
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-        // public void SetPassword(string password)
-        // {
-        //     using (var sha256 = SHA256.Create())
-        //     {
-        //         var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-        //         Password = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-        //     }
-        // } // student.Password = "abc"
-    }
+    public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
 }
