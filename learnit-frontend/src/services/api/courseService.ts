@@ -4,7 +4,7 @@ import Course from "../../model/course";
 export const GetCourses = async (): Promise<Course[]> => {
   try {
     const response: AxiosResponse<Course[]> = await axios.get(
-      "http://localhost:5292/api/course"
+      "http://localhost:5110/course"
     );
     return response.data;
   } catch (error) {
@@ -16,7 +16,7 @@ export const GetCourses = async (): Promise<Course[]> => {
   }
 };
 
-export const GetCourse = async (id: number): Promise<Course> => {
+/* export const GetCourse = async (id: number): Promise<Course> => {
   try {
     const response: AxiosResponse<Course> = await axios.get(
       `http://localhost:5292/api/course/${id}`
@@ -62,3 +62,4 @@ export const GetCoursesByStudentId = async (id: number): Promise<number[]> => {
     }
   }
 };
+ */

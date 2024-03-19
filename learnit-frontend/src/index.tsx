@@ -8,23 +8,21 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Login from "./components/Login";
-import ChooseUserType from "./components/ChooseUserType";
-import AuthContextProvider from "./services/context/auth/AuthContextProvider";
-import ProtectedRoute from "./components/ProtectedRoute";
+import CourseCatalog from "./components/CourseCatalog";
+import HomePage from "./components/HomePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <AuthContextProvider>
-        <App />
-      </AuthContextProvider>
-    ),
+    element: <App />,
     children: [
       {
         path: "/",
-        element: <ChooseUserType />,
+        element: <HomePage />,
+      },
+      {
+        path: "/courses",
+        element: <CourseCatalog />,
       },
     ],
   },
