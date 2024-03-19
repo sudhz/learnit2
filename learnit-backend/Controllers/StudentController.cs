@@ -79,6 +79,23 @@ namespace learnit_backend.Controllers
             return NoContent();
         }
 
+        [HttpGet("{id}/courses")]
+        public async Task<IActionResult> GetCourses(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+
+            if (student == null)
+            {
+                return NotFound("Student not found.");
+            }
+
+            var courses = await _context.Courses
+                .Where(c => c.Students.Any(s => s.StudentId == id))
+                .ToListAsync();
+
+            return Ok(courses);
+        }
+
         [HttpPost("auth")]
         public async Task<IActionResult> Auth([FromBody] JsonElement payload)
         {
