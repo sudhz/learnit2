@@ -13,7 +13,7 @@ public class CourseController(LearnitDbContext context) : ControllerBase
 
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
-    {       
+    {
         var courses = await _context.Courses.ToListAsync();
 
         if (courses == null || !courses.Any())
@@ -50,7 +50,7 @@ public class CourseController(LearnitDbContext context) : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            return Problem(ex.Message);
         }
     }
 
