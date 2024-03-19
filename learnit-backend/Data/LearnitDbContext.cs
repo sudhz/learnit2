@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+// using Microsoft.Extensions.Configuration;
 using learnit_backend.Models;
 
 namespace learnit_backend.Data;
@@ -42,7 +41,7 @@ public partial class LearnitDbContext : DbContext
             entity.ToTable("category");
 
             entity.Property(e => e.CategoryId)
-                .ValueGeneratedNever()
+                .UseIdentityColumn()
                 .HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
                 .HasMaxLength(255)
@@ -75,7 +74,7 @@ public partial class LearnitDbContext : DbContext
             entity.ToTable("course");
 
             entity.Property(e => e.CourseId)
-                .ValueGeneratedNever()
+                .UseIdentityColumn()
                 .HasColumnName("course_id");
             entity.Property(e => e.CourseDescription)
                 .HasColumnType("text")
@@ -125,7 +124,7 @@ public partial class LearnitDbContext : DbContext
             entity.ToTable("instructor");
 
             entity.Property(e => e.InstructorId)
-                .ValueGeneratedNever()
+                .UseIdentityColumn()
                 .HasColumnName("instructor_id");
             entity.Property(e => e.Bio)
                 .HasMaxLength(255)
@@ -152,7 +151,7 @@ public partial class LearnitDbContext : DbContext
             entity.ToTable("lecture");
 
             entity.Property(e => e.LectureId)
-                .ValueGeneratedNever()
+                .UseIdentityColumn()
                 .HasColumnName("lecture_id");
             entity.Property(e => e.LectureDuration).HasColumnName("lecture_duration");
             entity.Property(e => e.LectureName)
@@ -175,7 +174,7 @@ public partial class LearnitDbContext : DbContext
             entity.ToTable("module");
 
             entity.Property(e => e.ModuleId)
-                .ValueGeneratedNever()
+                .UseIdentityColumn()
                 .HasColumnName("module_id");
             entity.Property(e => e.ModuleDuration).HasColumnName("module_duration");
             entity.Property(e => e.ModuleName)
@@ -190,7 +189,7 @@ public partial class LearnitDbContext : DbContext
             entity.ToTable("student");
 
             entity.Property(e => e.StudentId)
-                .ValueGeneratedNever()
+                .UseIdentityColumn()
                 .HasColumnName("student_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
@@ -202,7 +201,7 @@ public partial class LearnitDbContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("phone");
-            entity.Property(e => e.StudentName)
+            entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .HasColumnName("student_name");
 
