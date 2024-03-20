@@ -8,28 +8,38 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+
 import CourseCatalog from "./components/CourseCatalog";
 import HomePage from "./components/HomePage";
 import StudentCourses from "./components/student/StudentCourses";
 import Quizz from "./components/student/Quiz";
 
 
+import Login from "./components/Login";
+import ChooseUserType from "./components/ChooseUserType";
+import AuthContextProvider from "./services/context/auth/AuthContextProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
+import CourseDetailPage from "./components/CourseLandingPage";
+import CourseLandingPage from "./components/CourseLandingPage";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    ),
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <ChooseUserType />,
       },
+     
       {
-        path: "/courses",
-        element: <CourseCatalog />,
-      },
-      {
-        path: "/student/courses",
-        element: <StudentCourses />,
+        path: "courselanding/:id",
+        element: <CourseLandingPage/>
       },
       {
         path: "/quiz/:id",
