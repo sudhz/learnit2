@@ -13,6 +13,7 @@ import HomePage from "./components/HomePage";
 import StudentCourses from "./components/student/StudentCourses";
 import CourseLandingPage from "./components/CourseLanding";
 import OnlinePaymentPage from "./components/OnlinePaymentPage";
+import Login from "./components/Login";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/courses",
         element: <CourseCatalog />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/student/courses",

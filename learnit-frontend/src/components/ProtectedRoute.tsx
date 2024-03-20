@@ -1,15 +1,14 @@
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../services/context/auth/authContext";
+
 import { useNavigate } from "react-router";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!auth.isLoggedIn) {
+    if (true /* replace with an actual condition */) {
       navigate("/", { replace: true });
     }
-  }, [navigate, auth]);
+  }, [navigate /* auth */]);
   return children;
 };
 

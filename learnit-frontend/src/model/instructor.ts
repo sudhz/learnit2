@@ -1,6 +1,6 @@
 export default interface Instructor {
-  id?: number;
-  name: string;
+  instructorId?: number;
+  instructorName: string;
   email: string;
   phone: string | null;
   password: string;

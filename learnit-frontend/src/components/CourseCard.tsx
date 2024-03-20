@@ -28,7 +28,7 @@ const CourseCard = ({
   progress?: number;
 }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card variant="outlined" sx={{ maxWidth: 345 }}>
       <Link
         to={`/course/${id}`}
         style={{ textDecoration: "none", color: "inherit" }}
