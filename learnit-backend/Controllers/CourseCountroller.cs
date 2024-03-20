@@ -8,8 +8,7 @@ using System.Text.Json;
 namespace learnit_backend.Controllers;
  
 [ApiController]
-[Route("api/[controller]")]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class CourseController(LearnitDbContext context) : ControllerBase
 {
     private readonly LearnitDbContext _context = context;
