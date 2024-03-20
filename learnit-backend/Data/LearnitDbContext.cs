@@ -39,7 +39,7 @@ public partial class LearnitDbContext : DbContext
     public virtual DbSet<StudentCourse> StudentCourses { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=learnit;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=DAYFORCEHXVXSAG\\SQLEXPRESS;Database=finalDb;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

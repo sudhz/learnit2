@@ -11,6 +11,8 @@ import "@fontsource/roboto/700.css";
 import CourseCatalog from "./components/CourseCatalog";
 import HomePage from "./components/HomePage";
 import StudentCourses from "./components/student/StudentCourses";
+import Quizz from "./components/student/Quiz";
+
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/student/courses",
         element: <StudentCourses />,
+      },
+      {
+        path: "/quiz/:id",
+        element: <Quizz />,
       },
     ],
   },

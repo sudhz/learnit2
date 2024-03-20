@@ -30,4 +30,5 @@ public partial class Course
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
     public virtual ICollection<Module> Modules { get; set; } = new List<Module>();
+    // public object Students { get; internal set; }
 }
