@@ -1,9 +1,11 @@
+import Instructor from "./instructor";
+
 export default interface Course {
-  courseId: number;
-  courseName: string;
-  courseDescription: string;
+  id: number;
+  name: string;
+  i_id: number;
+  instructors: Instructor[];
+  cDesc?: string;
   imgUrl?: string;
   price: number;
-  createdAt: string;
-  instructorId: number; 
 }

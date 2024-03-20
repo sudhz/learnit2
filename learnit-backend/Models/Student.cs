@@ -15,7 +15,5 @@ public partial class Student
 
     public string Password { get; set; } = null!;
 
-    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-    public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }
