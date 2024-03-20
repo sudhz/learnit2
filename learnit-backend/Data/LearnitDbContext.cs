@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// using System;
+// using System.Collections.Generic;
 using learnit_backend.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -95,7 +95,7 @@ public partial class LearnitDbContext : DbContext
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => new { e.CommentId, e.CourseId, e.StudentId });
+            entity.HasKey(e => new { e.CommentId });
 
             entity.ToTable("comments");
 
