@@ -40,6 +40,8 @@ const StudentCourses = () => {
                 imgUrl={course.imgUrl}
                 price={course.price}
                 createdAt={new Date(course.createdAt)}
+                showProgress={true}
+                progress={50}
               />
             </Grid>
           ))}
