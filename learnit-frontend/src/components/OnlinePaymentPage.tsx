@@ -155,7 +155,7 @@ const OnlinePaymentPage = () => {
                   Proceed
                 </Button>
                 <Button
-                  to="/CourseCatalogPage"
+                  to="/courses"
                   component={Link}
                   style={{
                     margin: '0 10px',
