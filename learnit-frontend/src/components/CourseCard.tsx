@@ -23,11 +23,11 @@ const CourseCard = ({
   createdAt: Date;
 }) => {
   return (
-    <Link
-      to={`/course/${id}`}
-      style={{ textDecoration: "none", color: "inherit" }}
-    >
-      <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }}>
+      <Link
+        to={`/course/${id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
         <CardHeader title={title} subheader={createdAt.toDateString()} />
         <CardMedia
           component="img"
@@ -43,8 +43,8 @@ const CourseCard = ({
             {`$${price}`}
           </Typography>
         </CardContent>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 };
 
