@@ -14,6 +14,7 @@ import AuthContextProvider from "./services/context/auth/AuthContextProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CourseDetailPage from "./components/CourseLandingPage";
 import CourseLandingPage from "./components/CourseLandingPage";
+import OnlinePaymentPage from "./components/OnlinePaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: "courselanding/:id",
         element: <CourseLandingPage/>
       },
+      {
+        path:"payment",
+        element:<OnlinePaymentPage/>
+      }
     ],
   },
 ]);
