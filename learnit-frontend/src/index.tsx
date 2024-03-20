@@ -8,6 +8,15 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import Login from "./components/Login";
+import ChooseUserType from "./components/ChooseUserType";
+import AuthContextProvider from "./services/context/auth/AuthContextProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
+import CourseEdit from "./components/Instructor/CourseEdit";
+import { idText } from "typescript";
+import LectureEdit from "./components/Instructor/LectureEdit";
+import ModuleEdit from "./components/Instructor/ModuleEdit";
+
 import CourseCatalog from "./components/CourseCatalog";
 import HomePage from "./components/HomePage";
 import StudentCourses from "./components/student/StudentCourses";
@@ -38,6 +47,18 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <OnlinePaymentPage />,
+      },
+      {
+        path: "/CourseEdit/:id",
+        element: <CourseEdit/>,
+      },
+      {
+        path: "/LectureEdit/:id",
+        element: <LectureEdit/>,
+      },
+      {
+        path: "/ModuleEdit/:id",
+        element: <ModuleEdit/>,
       },
     ],
   },
