@@ -3,6 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  LinearProgress,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -14,6 +15,8 @@ const CourseCard = ({
   imgUrl,
   price,
   createdAt,
+  showProgress,
+  progress,
 }: {
   id: number;
   title: string;
@@ -21,6 +24,8 @@ const CourseCard = ({
   imgUrl: string | undefined;
   price: number;
   createdAt: Date;
+  showProgress?: boolean;
+  progress?: number;
 }) => {
   return (
     <Link
@@ -43,6 +48,7 @@ const CourseCard = ({
             {`$${price}`}
           </Typography>
         </CardContent>
+        {showProgress && <LinearProgress variant="determinate" value={progress} />}
       </Card>
     </Link>
   );

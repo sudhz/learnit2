@@ -5,5 +5,5 @@ export default interface Course {
   imgUrl?: string;
   price: number;
   createdAt: string;
-  instructorId: number; 
+  instructorId: number;
 }

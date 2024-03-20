@@ -13,7 +13,7 @@ public partial class Lecture
 
     public TimeOnly LectureDuration { get; set; }
 
-    public int ModuleId { get; set; }
+    public int? ModuleId { get; set; }
 
-    public virtual Module Module { get; set; } = null!;
+    public virtual Module? Module { get; set; }
 }
