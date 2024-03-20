@@ -59,8 +59,8 @@ const OnlinePaymentPage = () => {
       color: 'rgba(52, 152, 219, 1)',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
       alignItems: 'center',
+      justifyContent: 'center',
       minHeight: '100vh',
     }}
     >
