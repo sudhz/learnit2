@@ -12,8 +12,6 @@ import Login from "./components/Login";
 import ChooseUserType from "./components/ChooseUserType";
 import AuthContextProvider from "./services/context/auth/AuthContextProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
-import CourseDetailPage from "./components/CourseLandingPage";
-import CourseLandingPage from "./components/CourseLandingPage";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +25,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ChooseUserType />,
-      },
-     
-      {
-        path: "courselanding/:id",
-        element: <CourseLandingPage/>
       },
     ],
   },
