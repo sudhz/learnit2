@@ -12,6 +12,11 @@ import Login from "./components/Login";
 import ChooseUserType from "./components/ChooseUserType";
 import AuthContextProvider from "./services/context/auth/AuthContextProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CourseEdit from "./components/Instructor/CourseEdit";
+import { idText } from "typescript";
+import LectureEdit from "./components/Instructor/LectureEdit";
+import ModuleEdit from "./components/Instructor/ModuleEdit";
+
 
 const router = createBrowserRouter([
   {
@@ -25,6 +30,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ChooseUserType />,
+      },
+      {
+        path: "/CourseEdit/:id",
+        element: <CourseEdit/>,
+      },
+      {
+        path: "/LectureEdit/:id",
+        element: <LectureEdit/>,
+      },
+      {
+        path: "/ModuleEdit/:id",
+        element: <ModuleEdit/>,
       },
     ],
   },
