@@ -12,6 +12,7 @@ import CourseCatalog from "./components/CourseCatalog";
 import HomePage from "./components/HomePage";
 import StudentCourses from "./components/student/StudentCourses";
 import CourseLandingPage from "./components/CourseLanding";
+import OnlinePaymentPage from "./components/OnlinePaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path:"/courseLanding/:id",
         element:<CourseLandingPage/>
+      },
+      {
+        path:"/payment",
+        element:<OnlinePaymentPage/>
       }
     ],
   },

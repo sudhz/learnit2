@@ -72,7 +72,7 @@ const CourseLandingPage: React.FC = () => {
         <div style={{ display: "flex", alignItems: "center" }}>
           <AccessTimeFilledIcon sx={{ color: "#3498db" }} />
           <span style={{ marginLeft: "5px" }}>2 Hours</span>
-          <Link to="/Payment" style={{ marginLeft: "10px" }}>
+          <Link to="/payment" style={{ marginLeft: "10px" }}>
             <Button
               variant="contained"
               sx={{
@@ -121,7 +121,7 @@ const CourseLandingPage: React.FC = () => {
             }}
           >
             {description}
-            {/* <strong>Key Features:</strong>
+            <strong>Key Features:</strong>
                   <ul>
                     <li>
                       Expert-led instruction: Learn from industry professionals
@@ -143,7 +143,7 @@ const CourseLandingPage: React.FC = () => {
                       Community support: Connect with peers, share insights, and
                       collaborate on projects.
                     </li>
-                  </ul> */}
+                  </ul> 
           </Typography>
         </Card>
       </div>
