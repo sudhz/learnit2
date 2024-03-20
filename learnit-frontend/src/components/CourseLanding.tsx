@@ -72,7 +72,7 @@ const CourseLandingPage: React.FC = () => {
         <div style={{ display: "flex", alignItems: "center" }}>
           <AccessTimeFilledIcon sx={{ color: "#3498db" }} />
           <span style={{ marginLeft: "5px" }}>2 Hours</span>
-          <Link to="/Payment" style={{ marginLeft: "10px" }}>
+          <Link to="/payment" style={{ marginLeft: "10px" }}>
             <Button
               variant="contained"
               sx={{
