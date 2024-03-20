@@ -1,8 +1,11 @@
+import Comment from "./comment";
+
 export default interface Student {
-  id?: number;
-  name: string;
+  studentId: number;
+  studentName: string;
   email: string;
   phone: string | null;
-  college: string | null;
   password: string;
+  comments: Comment[];
+  studentCourses?: [];
 }

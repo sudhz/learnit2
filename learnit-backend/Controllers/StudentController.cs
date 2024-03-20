@@ -79,21 +79,31 @@ namespace learnit_backend.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}/courses")]
-        public async Task<IActionResult> GetCourses(int id)
+        [HttpGet("{studentId}/courses")]
+        public async Task<IActionResult> GetStudentCourses(int studentId)
         {
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students.FindAsync(studentId);
 
             if (student == null)
             {
                 return NotFound("Student not found.");
             }
 
-            var courses = await _context.Courses
-                .Where(c => c.StudentCourses.Any(s => s.StudentId == id))
+            var studentCourses = await _context.StudentCourses
+                .Where(sc => sc.StudentId == studentId)
+                .Select(sc => new
+                {
+                    sc.CourseId,
+                    sc.Course.CourseName,
+                    sc.Course.CourseDescription,
+                    sc.Course.ImgUrl,
+                    sc.Course.Price,
+                    sc.Course.CreatedAt,
+                    Progress = sc.CompletionPercentage
+                })
                 .ToListAsync();
 
-            return Ok(courses);
+            return Ok(studentCourses);
         }
 
         [HttpPost("auth")]

@@ -32,13 +32,13 @@ const router = createBrowserRouter([
         element: <StudentCourses />,
       },
       {
-        path:"/courseLanding/:id",
-        element:<CourseLandingPage/>
+        path: "/course/:id",
+        element: <CourseLandingPage />,
       },
       {
-        path:"/payment",
-        element:<OnlinePaymentPage/>
-      }
+        path: "/payment",
+        element: <OnlinePaymentPage />,
+      },
     ],
   },
 ]);
