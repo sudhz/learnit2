@@ -121,7 +121,7 @@ const CourseLandingPage: React.FC = () => {
             }}
           >
             {description}
-            {/* <strong>Key Features:</strong>
+            <strong>Key Features:</strong>
                   <ul>
                     <li>
                       Expert-led instruction: Learn from industry professionals
@@ -143,7 +143,7 @@ const CourseLandingPage: React.FC = () => {
                       Community support: Connect with peers, share insights, and
                       collaborate on projects.
                     </li>
-                  </ul> */}
+                  </ul> 
           </Typography>
         </Card>
       </div>
