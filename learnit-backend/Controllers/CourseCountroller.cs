@@ -94,7 +94,38 @@ public class CourseController(LearnitDbContext context) : ControllerBase
         return NoContent(); // Return a 204 No Content status code to indicate success
     }
 
-    private bool CourseExists(int id)
+    [HttpGet("{courseId}/top-courses")]
+    public async Task<IActionResult> GetTopCourses(int courseId)
+    {
+        try
+        {
+            var studentIdsWithCourse = await _context.StudentCourses
+                .Where(sc => sc.CourseId == courseId)
+                .Select(sc => sc.StudentId)
+                .ToListAsync();
+
+            var topCourses = await _context.StudentCourses
+                .Where(sc => studentIdsWithCourse.Contains(sc.StudentId) && sc.CourseId != courseId)
+                .GroupBy(sc => sc.CourseId)
+                .OrderByDescending(group => group.Count())
+                .Take(3)
+                .Select(group => group.Key)
+                .ToListAsync();
+
+            var courses = await _context.Courses
+                .Where(c => topCourses.Contains(c.CourseId))
+                .ToListAsync();
+
+            return Ok(courses);
+        }
+        catch (Exception ex)
+        {
+            return Problem(ex.Message);
+        }
+    }
+
+}
+private bool CourseExists(int id)
     {
         return _context.Courses.Any(e => e.CourseId == id);
     }
