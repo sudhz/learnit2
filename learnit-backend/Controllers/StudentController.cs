@@ -135,10 +135,5 @@ namespace learnit_backend.Controllers
                 return BadRequest(new { message = "Email or password not provided." });
             }
         }
-
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.StudentId == id);
-        }
     }
 }

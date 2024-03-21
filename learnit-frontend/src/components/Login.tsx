@@ -70,7 +70,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <Stack margin={20} alignItems="center">
+    <Stack margin={15} alignItems="center">
       <Typography variant="h2">Login</Typography>
       <Box margin={5}>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>

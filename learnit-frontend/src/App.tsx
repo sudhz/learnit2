@@ -77,7 +77,7 @@ const App = () => {
                       size="large"
                       color="inherit"
                       component={Link}
-                      to="/instructor/home/coursebuilder"
+                      to="/instructor/coursebuilder"
                     >
                       <Add /> {/* Assuming you have an AddIcon imported */}
                     </IconButton>
