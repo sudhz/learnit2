@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   AppBar,
   Box,
@@ -5,6 +6,11 @@ import {
   Toolbar,
   Typography,
   Button,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -14,6 +20,17 @@ import { Link } from "react-router-dom";
 const App: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [signupOpen, setSignupOpen] = useState(false);
+
+  const handleSignupChange = (event: SelectChangeEvent<string>) => {
+    const selectedValue = event.target.value;
+    navigate(`/${selectedValue}/signup`);
+  };
+
+  const handleSignupClick = () => {
+    setSignupOpen(!signupOpen);
+  };
+
   return (
     <>
       <header>
@@ -39,10 +56,33 @@ const App: React.FC = () => {
                   Browse courses
                 </Button>
               ) : null}
-              <Button color="inherit">Sign up</Button>
               <Button color="inherit" onClick={() => navigate("/login")}>
                 Login
               </Button>
+              <FormControl sx={{minWidth: 120 }}>
+                <InputLabel id="signup-label" style={{ color: "white" }}>
+                  SIGN UP
+                </InputLabel>
+                <Select
+                  labelId="signup-label"
+                  id="signup-select"
+                  value=""
+                  open={signupOpen}
+                  onOpen={handleSignupClick}
+                  onClose={handleSignupClick}
+                  onChange={handleSignupChange}
+                  displayEmpty
+                  renderValue={(selected) => {
+                    if (selected === "") {
+                      return <em style={{ color: "white" }}></em>;
+                    }
+                    return selected;
+                  }}
+                >
+                  <MenuItem value="student">Student</MenuItem>
+                  <MenuItem value="instructor">Instructor</MenuItem>
+                </Select>
+              </FormControl>
             </Toolbar>
           </AppBar>
         </Box>

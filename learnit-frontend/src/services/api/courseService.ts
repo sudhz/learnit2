@@ -64,3 +64,20 @@ export const GetCoursesByStudentId = async (id: number): Promise<Course[]> => {
     }
   }
 };
+
+
+export const GetTimeTable = async (id: number): Promise<Course[]> => {
+  try {
+    const response: AxiosResponse<Course[]> = await axios.get(
+      `http://localhost:5110/api/student/${id}/courses`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.message);
+    } else {
+      throw new Error('Unknown error');
+    }
+  }
+};
+

@@ -10,10 +10,15 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import CourseCatalog from "./components/CourseCatalog";
 import HomePage from "./components/HomePage";
-import StudentCourses from "./components/student/StudentCourses";
+import StudentCourses from "./components/Student/StudentCourses";
 import CourseLandingPage from "./components/CourseLanding";
 import OnlinePaymentPage from "./components/OnlinePaymentPage";
 import Login from "./components/Login";
+import TimeTable from "./components/Student/TimeTable";
+import StudentSignup from "./components/Student/StudentSignup";
+import UpdateStudentProfile from "./components/Student/UpdateStudentProfile";
+import UpdateInstructorProfile from "./components/Instructor/UpdateInstructorProfile";
+import InstructorSignup from "./components/Instructor/InstructorSignup";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +48,26 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <OnlinePaymentPage />,
+      },
+      {
+        path: "timetable/:id",
+        element: <TimeTable />,
+      },
+      {
+        path: "student/signup",
+        element: <StudentSignup />,
+      },
+      {
+        path: "instructor/signup",
+        element: <InstructorSignup />,
+      },
+      {
+        path: "updatestudent/:id",
+        element: <UpdateStudentProfile />,
+      },
+      {
+        path: "updateinstructor/:id",
+        element: <UpdateInstructorProfile />,
       },
     ],
   },
