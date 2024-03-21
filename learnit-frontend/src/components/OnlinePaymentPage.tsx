@@ -52,14 +52,17 @@ const OnlinePaymentPage = () => {
 
   return (
     <Container
-      style={{
-        textAlign: 'center',
-        marginTop: '25px',
-        marginLeft: '80px',
-        marginRight: '80px',
-        background: 'rgba(175, 219, 245, 1)',
-        color: 'rgba(52, 152, 219, 1)',
-      }}
+    style={{
+      textAlign: 'center',
+      marginTop: '25px',
+      background: 'rgba(175, 219, 245, 1)',
+      color: 'rgba(52, 152, 219, 1)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
+    }}
     >
       <Typography variant="h3" style={{ fontWeight: 'bold' }}>
         Payment
