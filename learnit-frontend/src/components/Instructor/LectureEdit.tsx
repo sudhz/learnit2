@@ -76,7 +76,7 @@ const LectureEdit: React.FC = () => {
         <TextField
           fullWidth
           label="normal"
-          name="lectureLink"
+          name="lectureUrl"
           value={lecture.lectureUrl}
           onChange={handleChange}
           margin="normal"
@@ -85,7 +85,7 @@ const LectureEdit: React.FC = () => {
           fullWidth
           type="text"
           label="Duration"
-          name="Duration"
+          name="lectureDuration"
           value={lecture.lectureDuration}
           onChange={handleChange}
           margin="normal"

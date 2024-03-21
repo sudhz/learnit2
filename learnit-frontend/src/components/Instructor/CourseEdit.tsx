@@ -9,9 +9,9 @@ import Course from '../../model/course';
 const CourseEdit: React.FC = () => {
   const [course, setCourse] = useState<Course>({
     courseId: 0,
-    courseName: "",
-    courseDescription: "",
-    imgUrl: "",
+    courseName: " ",
+    courseDescription: " ",
+    imgUrl: " ",
     price: 0,
     createdAt: " ",
     instructorId: 0
@@ -22,16 +22,8 @@ const CourseEdit: React.FC = () => {
     const fetchCourse = async () => {
       try {
         const response = await axios.get<Course>(`http://localhost:5110/api/course/${id}`);
-        const { courseId, courseName, courseDescription, imgUrl, price, createdAt, instructorId } = response.data;
-        setCourse({
-          courseId,
-          courseName,
-          courseDescription,
-          imgUrl,
-          price,
-          createdAt,
-          instructorId
-        });
+        //const { CourseId, CourseName, CourseDescription, imgUrl, price, createdAt, instructorId } = response.data;
+        setCourse(response.data);
         console.log(response.data);
       } catch (error) {
         console.error('Error fetching course:', error);

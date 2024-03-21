@@ -79,7 +79,7 @@ const ModuleEdit: React.FC = () => {
           fullWidth
           type="text"
           label="Duration"
-          name="Duration"
+          name="moduleDuration"
           value={module.moduleDuration}
           onChange={handleChange}
           margin="normal"

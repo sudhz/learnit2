@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
  
-namespace learnit_backend.Controllers;
+namespace learnit_Backend.Controllers;
  
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
+
 public class CourseController(LearnitDbContext context) : ControllerBase
 {
     private readonly LearnitDbContext _context = context;
@@ -16,23 +17,7 @@ public class CourseController(LearnitDbContext context) : ControllerBase
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
     {
-        // to get the modules in each course and the student ids
- 
-        //var courses = await _context.Courses
-        //     .Select(c => new
-        //     {
-        //         CourseId = c.CourseId,
-        //         CourseName = c.CourseName,
-        //         CourseDescription = c.CourseDescription,
-        //         ImgUrl = c.ImgUrl,
-        //         Price = c.Price,
-        //         CreatedAt = c.CreatedAt,
-        //         InstructorId = c.InstructorId,
-        //         Categories = c.Categories.Select(cat => cat.CategoryId).ToList(),
-        //         Modules = c.Modules,
-        //         Students = c.Students.Select(student => student.StudentId).ToList(),
-        //     })
-        //     .ToListAsync();
+       
         var courses = await _context.Courses.ToListAsync();
  
         if (courses == null || !courses.Any())
