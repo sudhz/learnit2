@@ -18,7 +18,7 @@ const FreqBoughtCourses = () => {
       }
     };
     fetchCourses();
-  }, []);
+  }, [id]);
 
   return (
     <>

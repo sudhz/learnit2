@@ -23,7 +23,7 @@ public partial class Course
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-    public virtual Instructor Instructor { get; set; } = null!;
+    public virtual Instructor? Instructor { get; set; } = null;
 
     public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
 

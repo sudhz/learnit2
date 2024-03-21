@@ -89,13 +89,13 @@ namespace learnit_backend.Controllers
             var module = await _context.Modules.FindAsync(id);
             if (module == null)
             {
-                return NotFound(); // Return 404 Not Found if module with given id is not found
+                return NotFound();
             }
 
             _context.Modules.Remove(module);
-            await _context.SaveChangesAsync(); // Save changes to the database
+            await _context.SaveChangesAsync();
 
-            return Ok(module); // Return the deleted module
+            return Ok(module);
         }
 
         private bool ModuleExists(int id)

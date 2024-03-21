@@ -30,6 +30,7 @@ import UpdateStudentProfile from "./components/student/UpdateStudentProfile";
 import TimeTable from "./components/student/TimeTable";
 import StartModules from "./components/student/StartModules";
 import CourseBuilder from "./components/instructor/CourseBuilder";
+import Module from "./components/instructor/Module";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
       {
         path: "/instructor/coursebuilder",
         element: <CourseBuilder />,
+      },
+      {
+        path: "/instructor/coursebuilder/module",
+        element: <Module />,
       },
       {
         path: "/student/home",

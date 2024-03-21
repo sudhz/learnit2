@@ -30,7 +30,7 @@ public class CourseController(LearnitDbContext context) : ControllerBase
     {
         _context.Courses.Add(course);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(Course), new { id = course.CourseId }, course);
+        return CreatedAtAction(nameof(GetCourses), new { id = course.CourseId }, course);
     }
 
     [HttpPut("{id}")]
@@ -50,14 +50,14 @@ public class CourseController(LearnitDbContext context) : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Course>> GetCourse(int id)
     {
-        var course = await _context.Courses.FindAsync(id);
+        var course = await _context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.CourseId == id);
 
         if (course == null)
         {
             return NotFound();
         }
 
-        return course;
+        return Ok(course);
     }
 
     [HttpDelete("{id}")]

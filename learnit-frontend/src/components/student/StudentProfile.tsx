@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Typography, Avatar, Button } from "@mui/material";
+import { Card, CardContent, Typography, Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import Student from "../../model/student";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";

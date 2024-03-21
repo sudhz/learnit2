@@ -4,7 +4,6 @@ import { Grid, Typography } from "@mui/material";
 import Course from "../../model/course";
 import { GetCoursesByStudentId } from "../../services/api/courseService";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
-import { Link } from "react-router-dom";
 
 const StudentCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -15,6 +15,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import useLocalStorage from "../../services/hooks/useLocalStorage";
+import { GetInstructor } from "../../services/api/instructorService";
 
 // Define the schema for validation
 const schema = z.object({
@@ -54,20 +56,8 @@ type FormFields = z.infer<typeof schema>;
 const CourseBuilder: React.FC = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [selectedRadio, setSelectedRadio] = useState("");
   const [courseId, setCourseId] = useState<number | null>(null);
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSelectedRadio(event.currentTarget.value);
-  // };
+  const { getItem } = useLocalStorage("user");
 
   const onSubmitCreateCourse: SubmitHandler<FormFields> = async (data) => {
     try {
@@ -76,12 +66,8 @@ const CourseBuilder: React.FC = () => {
         courseDescription: data.content,
         imgUrl: data.imgUrl,
         price: data.price,
-        createdAt: "2024-03-18T14:33:51.657",
-        instructorId: 2,
-        instructor: null,
-        categories: [],
-        modules: [],
-        students: [],
+        createdAt: new Date().toISOString(),
+        instructorId: getItem().id,
       });
 
       const config = {
@@ -94,40 +80,15 @@ const CourseBuilder: React.FC = () => {
         data: newCourse,
       };
       const response = await axios.request(config);
-      setCourseId(response.data.id);
-      alert("Error creating course. Please try again.");
+      console.log(response.data);
+      setCourseId(response.data.courseId);
+      alert("Course created successfully!");
     } catch (error) {
       console.log(error);
-      alert("Course created successfully!");
+      alert("Error creating course. Please try again.");
     }
   };
 
-  // const handleConfirm = () => {
-  //   switch (selectedRadio) {
-  //     case "option1":
-  //       {
-  //         navigate(`/instructor/home/coursebuilder/${courseId}/video`);
-  //       }
-  //       break;
-  //     case "option2":
-  //       {
-  //         navigate("/instructor/home/coursebuilder/Assignment");
-  //       }
-  //       break;
-  //     case "option3":
-  //       {
-  //         navigate("/instructor/home/coursebuilder/quiz");
-  //       }
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  //   handleClose();
-  // };
-  // const navigator = (path: string) => {
-  //   window.location.href = path;
-  // };
   useEffect(() => {
     handleOpenDialogue();
   }, []);
@@ -138,7 +99,7 @@ const CourseBuilder: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control, // Use control for Controller
+    control,
   } = useForm<FormFields>({
     resolver: zodResolver(schema),
   });
@@ -214,7 +175,6 @@ const CourseBuilder: React.FC = () => {
                 />
               </RadioGroup>
             </FormControl>
-            {/* Add the course start and end date fields */}
             <Typography
               component="legend"
               variant="h5"
@@ -267,56 +227,10 @@ const CourseBuilder: React.FC = () => {
               error={!!errors.content}
               helperText={errors.content?.message}
             />
-
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
-              Add Item
-            </Button>
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            > */}
-            {/* <DialogTitle id="alert-dialog-title">New Item</DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  Upload Or Create
-                </DialogContentText>
-
-                <RadioGroup
-                  aria-label="items"
-                  name="items1"
-                  value={selectedRadio}
-                  onChange={handleRadioChange}
-                >
-                  <FormControlLabel
-                    value="option1"
-                    control={<Radio />}
-                    label="Video"
-                  />
-                  <FormControlLabel
-                    value="option2"
-                    control={<Radio />}
-                    label="Assignment"
-                  />
-                  <FormControlLabel
-                    value="option3"
-                    control={<Radio />}
-                    label="Quiz"
-                  />
-                </RadioGroup>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleConfirm} autoFocus>
-                  OK
-                </Button>
-              </DialogActions>
-            </Dialog> */}
-
             <Button
               variant="contained"
               color="primary"
+              disabled={!courseId}
               onClick={() => {
                 navigate("/instructor/coursebuilder/module");
               }}
