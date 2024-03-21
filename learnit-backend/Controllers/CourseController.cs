@@ -33,7 +33,7 @@ public class CourseController(LearnitDbContext context) : ControllerBase
         //         Students = c.Students.Select(student => student.StudentId).ToList(),
         //     })
         //     .ToListAsync();
-        
+
         var courses = await _context.Courses.ToListAsync();
 
         if (courses == null || !courses.Any())
