@@ -4,6 +4,7 @@ import { Grid, Typography } from "@mui/material";
 import Course from "../../model/course";
 import { GetCoursesByStudentId } from "../../services/api/courseService";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
+import { Link } from "react-router-dom";
 
 const StudentCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -38,6 +39,7 @@ const StudentCourses = () => {
             <Grid item key={idx} md={4} xs={8} sm={8} alignItems="center">
               <CourseCard
                 id={course.courseId}
+                linkTo={`/student/course/${course.courseId}`}
                 title={course.courseName}
                 description={course.courseDescription}
                 imgUrl={course.imgUrl}

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const CourseCard = ({
   id,
+  linkTo,
   title,
   description,
   imgUrl,
@@ -20,6 +21,7 @@ const CourseCard = ({
   progress,
 }: {
   id: number;
+  linkTo: string;
   title: string;
   description: string;
   imgUrl: string | undefined;
@@ -31,10 +33,7 @@ const CourseCard = ({
 }) => {
   return (
     <Card variant="outlined" sx={{ maxWidth: 345 }}>
-      <Link
-        to={`/course/${id}`}
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
+      <Link to={linkTo} style={{ textDecoration: "none", color: "inherit" }}>
         <CardHeader title={title} subheader={createdAt.toDateString()} />
         <CardMedia
           component="img"

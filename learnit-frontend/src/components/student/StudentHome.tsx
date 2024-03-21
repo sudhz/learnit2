@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 const StudentHome = () => {
   const navigate = useNavigate();
   const backgroundStyle = {
-    backgroundImage: `url("https://cdn.elearningindustry.com/wp-content/uploads/2022/01/shutterstock_525008128.jpg")`, // Replace with your actual image URL
-    backgroundSize: "cover",
+    backgroundImage: `url("https://asset.gecdesigns.com/img/background-templates/isometric-e-learning-background-template-1612282245987-cover.webp")`, // Replace with your actual image URL
+    backgroundSize: "actual",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     minHeight: "60vh",

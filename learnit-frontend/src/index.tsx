@@ -25,6 +25,10 @@ import StudentSignup from "./components/student/StudentSignup";
 import InstructorCourses from "./components/instructor/InstructorCourses";
 import InstructorProfile from "./components/instructor/InstructorProfile";
 import UpdateInstructorProfile from "./components/instructor/UpdateInstructorProfile";
+import StudentProfile from "./components/student/StudentProfile";
+import UpdateStudentProfile from "./components/student/UpdateStudentProfile";
+import TimeTable from "./components/student/TimeTable";
+import StartModules from "./components/student/StartModules";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +62,22 @@ const router = createBrowserRouter([
       {
         path: "/student/signup",
         element: <StudentSignup />,
+      },
+      {
+        path: "/student/:id/profile",
+        element: <StudentProfile />,
+      },
+      {
+        path: "/student/:id/profile/edit",
+        element: <UpdateStudentProfile />,
+      },
+      {
+        path: "/student/:id/timetable",
+        element: <TimeTable />,
+      },
+      {
+        path: "/student/course/:id",
+        element: <StartModules />,
       },
       {
         path: "/login",
