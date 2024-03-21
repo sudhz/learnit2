@@ -38,6 +38,7 @@ const CourseCatalog = () => {
                 title={course.courseName}
                 description={course.courseDescription}
                 imgUrl={course.imgUrl}
+                includePrice={true}
                 price={course.price}
                 createdAt={new Date(course.createdAt)}
               />

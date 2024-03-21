@@ -13,6 +13,7 @@ const CourseCard = ({
   title,
   description,
   imgUrl,
+  includePrice,
   price,
   createdAt,
   showProgress,
@@ -23,6 +24,7 @@ const CourseCard = ({
   description: string;
   imgUrl: string | undefined;
   price: number;
+  includePrice: boolean;
   createdAt: Date;
   showProgress?: boolean;
   progress?: number;
@@ -44,9 +46,11 @@ const CourseCard = ({
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
-          <Typography variant="h6" color="text.secondary" marginTop={1}>
-            {`$${price}`}
-          </Typography>
+          {includePrice && (
+            <Typography variant="h6" color="text.secondary" marginTop={1}>
+              {`$${price}`}
+            </Typography>
+          )}
         </CardContent>
         {showProgress && (
           <LinearProgress variant="determinate" value={progress} />

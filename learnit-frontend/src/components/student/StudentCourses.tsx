@@ -8,17 +8,18 @@ import useLocalStorage from "../../services/hooks/useLocalStorage";
 const StudentCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const { getItem } = useLocalStorage("user");
+  const id = getItem().id;
   useEffect(() => {
     const fetchCoursesByStudentId = async () => {
       try {
-        const data = await GetCoursesByStudentId(getItem().id);
+        const data = await GetCoursesByStudentId(id);
         setCourses(data);
       } catch (error) {
         console.error(`Error fetching courses: ${error}`);
       }
     };
     fetchCoursesByStudentId();
-  }, [getItem().id]);
+  }, [id]);
 
   return (
     <>
@@ -40,6 +41,7 @@ const StudentCourses = () => {
                 title={course.courseName}
                 description={course.courseDescription}
                 imgUrl={course.imgUrl}
+                includePrice={false}
                 price={course.price}
                 createdAt={new Date(course.createdAt)}
                 showProgress={true}
@@ -49,7 +51,7 @@ const StudentCourses = () => {
           ))}
         </Grid>
       ) : (
-        "Loading..."
+        "Loading the courses..."
       )}
     </>
   );

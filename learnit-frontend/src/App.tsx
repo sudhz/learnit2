@@ -24,7 +24,13 @@ const App: React.FC = () => {
             <Toolbar>
               <IconButton
                 component={Link}
-                to="/"
+                to={
+                  getItem()
+                    ? getItem().role === "student"
+                      ? "/student/home"
+                      : "/instructor/home"
+                    : "/"
+                }
                 size="large"
                 edge="start"
                 color="inherit"
@@ -36,8 +42,10 @@ const App: React.FC = () => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Learnit
               </Typography>
-              {getItem() ? <Button color="inherit">Sign up</Button> : null}
-              {getItem() ? (
+              {location.pathname === "/" ? (
+                <Button color="inherit">Sign up</Button>
+              ) : null}
+              {location.pathname === "/" ? (
                 <Button color="inherit" onClick={() => navigate("/login")}>
                   Login
                 </Button>

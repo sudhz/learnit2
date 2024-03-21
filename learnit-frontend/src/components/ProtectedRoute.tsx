@@ -1,14 +1,16 @@
 import { useContext, useEffect } from "react";
 
 import { useNavigate } from "react-router";
+import useLocalStorage from "../services/hooks/useLocalStorage";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const navigate = useNavigate();
+  const { getItem } = useLocalStorage("user");
   useEffect(() => {
-    if (true /* replace with an actual condition */) {
+    if (!getItem()) {
       navigate("/", { replace: true });
     }
-  }, [navigate /* auth */]);
+  }, [navigate, getItem()]);
   return children;
 };
 

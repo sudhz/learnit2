@@ -14,6 +14,9 @@ import StudentCourses from "./components/student/StudentCourses";
 import CourseLandingPage from "./components/CourseLanding";
 import OnlinePaymentPage from "./components/OnlinePaymentPage";
 import Login from "./components/Login";
+import StudentHome from "./components/student/StudentHome";
+import InstructorHome from "./components/instructor/InstructorHome";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,22 @@ const router = createBrowserRouter([
       {
         path: "/student/courses",
         element: <StudentCourses />,
+      },
+      {
+        path: "/student/home",
+        element: (
+          <ProtectedRoute>
+            <StudentHome />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/instructor/home",
+        element: (
+          <ProtectedRoute>
+            <InstructorHome />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/course/:id",
