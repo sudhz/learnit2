@@ -90,7 +90,7 @@ namespace learnit_backend.Controllers
             }
 
             var courses = await _context.Courses
-                .Where(c => c.Students.Any(s => s.StudentId == id))
+                .Where(c => c.StudentCourses.Any(s => s.StudentId == id))
                 .ToListAsync();
 
             return Ok(courses);

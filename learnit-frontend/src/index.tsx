@@ -11,6 +11,7 @@ import "@fontsource/roboto/700.css";
 import CourseCatalog from "./components/CourseCatalog";
 import HomePage from "./components/HomePage";
 import StudentCourses from "./components/student/StudentCourses";
+import AddAssignmentForm from "./components/instructor/Assignment";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/student/courses",
         element: <StudentCourses />,
+      },
+      {
+        path: "/instructor/coursebuilder/assignment",
+        element: <AddAssignmentForm />,
       },
     ],
   },
