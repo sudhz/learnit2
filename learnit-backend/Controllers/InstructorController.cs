@@ -14,11 +14,11 @@ namespace Learnit_Backend.Controllers
         private readonly LearnitDbContext _context = context;
 
         [HttpPost]
-        public async Task<ActionResult<Instructor>> CreateStudent(Instructor instructor)
+        public async Task<ActionResult<Instructor>> CreateInstructor(Instructor instructor)
         {
             _context.Instructors.Add(instructor);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Instructor), new { id = instructor.InstructorId }, instructor);
+            return CreatedAtAction(nameof(GetInstructors), new { id = instructor.InstructorId }, instructor);
         }
 
         [HttpPut("{id}")]
@@ -120,6 +120,32 @@ namespace Learnit_Backend.Controllers
             }
 
 
+        }
+
+        [HttpGet("{instructorId}/courses")]
+        public async Task<IActionResult> GetStudentCourses(int instructorId)
+        {
+            var student = await _context.Students.FindAsync(instructorId);
+
+            if (student == null)
+            {
+                return NotFound("There are no courses made by you.");
+            }
+
+            var studentCourses = await _context.Courses
+                .Where(c => c.InstructorId == instructorId)
+                .Select(c => new
+                {
+                    c.CourseId,
+                    c.CourseName,
+                    c.CourseDescription,
+                    c.ImgUrl,
+                    c.Price,
+                    c.CreatedAt,
+                })
+                .ToListAsync();
+
+            return Ok(studentCourses);
         }
     }
 }

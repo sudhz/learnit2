@@ -17,6 +17,14 @@ import Login from "./components/Login";
 import StudentHome from "./components/student/StudentHome";
 import InstructorHome from "./components/instructor/InstructorHome";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CourseDescription from "./components/instructor/CourseDescription";
+import CourseDiscussion from "./components/student/CourseDiscussion";
+import SignUp from "./components/SignUp";
+import InstructorSignup from "./components/instructor/InstructorSignup";
+import StudentSignup from "./components/student/StudentSignup";
+import InstructorCourses from "./components/instructor/InstructorCourses";
+import InstructorProfile from "./components/instructor/InstructorProfile";
+import UpdateInstructorProfile from "./components/instructor/UpdateInstructorProfile";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +40,36 @@ const router = createBrowserRouter([
         element: <CourseCatalog />,
       },
       {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/instructor/signup",
+        element: <InstructorSignup />,
+      },
+      {
+        path: "/instructor/:id/profile",
+        element: <InstructorProfile />,
+      },
+      {
+        path: "/instructor/:id/profile/edit",
+        element: <UpdateInstructorProfile />,
+      },
+      {
+        path: "/student/signup",
+        element: <StudentSignup />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
       {
         path: "/student/courses",
         element: <StudentCourses />,
+      },
+      {
+        path: "/instructor/courses",
+        element: <InstructorCourses />,
       },
       {
         path: "/student/home",
@@ -62,6 +94,14 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <OnlinePaymentPage />,
+      },
+      {
+        path: "/course/description/:id",
+        element: <CourseDescription />,
+      },
+      {
+        path: "/course/discussion/:id/:studId",
+        element: <CourseDiscussion />,
       },
     ],
   },

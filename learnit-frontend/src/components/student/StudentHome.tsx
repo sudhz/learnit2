@@ -20,7 +20,7 @@ const StudentHome = () => {
     padding: "20px",
     border: "1px solid grey",
     borderRadius: "2px",
-    backgroundColor: "rgba(255, 255, 255, 0.8)", // Adjust the background color and opacity
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
     textAlign: "center",
   };
 

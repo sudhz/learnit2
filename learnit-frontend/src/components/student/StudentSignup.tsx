@@ -7,38 +7,49 @@ import {
   Stack,
   TextField,
   Typography,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
 } from "@mui/material";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { AuthInstructor } from "../services/api/instructorService";
-import { AuthStudent } from "../services/api/studentService";
 import { useState } from "react";
-import useLocalStorage from "../services/hooks/useLocalStorage";
-import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
+import { AddStudent } from "../../services/api/studentService";
+import Student from "../../model/student";
 
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-  role: z.string().min(1, { message: "Please select a role" }),
-});
+const schema = z
+  .object({
+    name: z.string(),
+    email: z.string().email(),
+    phone: z
+      .string()
+      .optional()
+      .refine(
+        (value) => {
+          if (!value) return true;
+          return /^\d{10}$/.test(value);
+        },
+        { message: "Phone number must be 10 digits" }
+      ),
+    password: z
+      .string()
+      .min(8, { message: "Password number must be 8 characters" }),
+    confirmedPassword: z
+      .string()
+      .min(8, { message: "Password number must be 8 characters" }),
+  })
+  .refine((data) => data.password === data.confirmedPassword, {
+    path: ["confirmedPassword"],
+    message: "Passwords do not match",
+  });
 
 type FormFields = z.infer<typeof schema>;
 
-const Login = () => {
+const StudentSignup = () => {
   const navigate = useNavigate();
-  const { setItem } = useLocalStorage("user");
   const {
     register,
     handleSubmit,
-    control,
     setError,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
@@ -47,40 +58,49 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const id =
-        data.role === "instructor"
-          ? await AuthInstructor(data.email, data.password)
-          : await AuthStudent(data.email, data.password);
-      navigate(
-        data.role === "instructor" ? "/instructor/home" : "/student/home",
-        {
-          replace: true,
-        }
-      );
-      setItem({ id: id.id, role: data.role });
-      alert("Logged in successfully!");
+      const studentObj: Student = {
+        studentName: data.name,
+        email: data.email,
+        phone: data.phone ? data.phone : undefined,
+        password: data.password,
+      };
+      const response = await AddStudent(studentObj);
+      console.log(response);
+      alert("Signup successfull!");
+      navigate("/login");
     } catch (error) {
-      alert("Email or password is invalid!");
       setError("root", {
         message: `${error}`,
       });
     }
   };
-
   const [showPassword, setShowPassword] = useState(false);
-
   return (
-    <Stack margin={20} alignItems="center">
-      <Typography variant="h2">Login</Typography>
-      <Box margin={5}>
+    <Stack margin={5} alignItems="center">
+      <Typography variant="h2">Signup as a student</Typography>
+      <Box margin={3}>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={2} width={400}>
+            <TextField
+              {...register("name")}
+              label="Name"
+              type="text"
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
             <TextField
               {...register("email")}
               label="Email"
               type="email"
               error={!!errors.email}
               helperText={errors.email?.message}
+            />
+            <TextField
+              {...register("phone", { required: false })}
+              label="Phone (optional)"
+              type="number"
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
             />
             <TextField
               {...register("password")}
@@ -107,30 +127,15 @@ const Login = () => {
                 ),
               }}
             />
-            <Controller
-              name="role"
-              control={control}
-              defaultValue="student"
-              render={({ field }) => (
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Select Role</FormLabel>
-                  <RadioGroup row aria-label="role" {...field}>
-                    <FormControlLabel
-                      value="student"
-                      control={<Radio />}
-                      label="Student"
-                    />
-                    <FormControlLabel
-                      value="instructor"
-                      control={<Radio />}
-                      label="Instructor"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              )}
+            <TextField
+              {...register("confirmedPassword")}
+              label="Confirm Password"
+              type="password"
+              error={!!errors.confirmedPassword}
+              helperText={errors.confirmedPassword?.message}
             />
-            {errors.role && (
-              <Alert severity="error">{errors.role.message}</Alert>
+            {errors.root && (
+              <Alert severity="error">{errors.root.message}</Alert>
             )}
             <Button
               type="submit"
@@ -138,7 +143,7 @@ const Login = () => {
               color="primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Loading..." : "Login"}
+              {isSubmitting ? "Loading..." : "Signup"}
             </Button>
             <Button
               variant="contained"
@@ -155,4 +160,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default StudentSignup;

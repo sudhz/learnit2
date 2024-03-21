@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,6 +11,7 @@ import {
 import { AccessTimeFilled as AccessTimeFilledIcon } from "@mui/icons-material";
 import axios from "axios";
 import FreqBoughtCourses from "./student/FreqBoughtCourses";
+import useLocalStorage from "../services/hooks/useLocalStorage";
 interface Module {
   id: number;
   title: string;
@@ -18,6 +19,8 @@ interface Module {
 }
 const CourseLandingPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
+  const navigate = useNavigate();
+  const { getItem } = useLocalStorage("user");
   const [description, setDescription] = useState("");
   const [name_v, setName] = useState("");
   const [modules, setModules] = useState<Module[]>([
@@ -266,6 +269,10 @@ const CourseLandingPage: React.FC = () => {
             color: "white",
             padding: "12px",
             cursor: "pointer",
+          }}
+          onClick={() => {
+            window.scrollTo(0, 0);
+            navigate(`/course/discussion/${id}/${getItem().id}`);
           }}
         >
           COMMENT

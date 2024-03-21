@@ -97,7 +97,7 @@ export const AuthInstructor = async (email: string, password: string) => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      if (error.status === 404) {
+      if (error.response?.status === 404) {
         throw new Error("email not found");
       } else if (error.status === 400) {
         throw new Error("email or password is invalid");

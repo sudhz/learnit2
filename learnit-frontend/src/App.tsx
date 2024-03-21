@@ -5,17 +5,24 @@ import {
   Toolbar,
   Typography,
   Button,
+  Tooltip,
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
+import LibraryBooks from "@mui/icons-material/LibraryBooks";
+import { Add } from "@mui/icons-material";
+import { Bookmark } from "@mui/icons-material";
+import { AccountCircle } from "@mui/icons-material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import { Link } from "react-router-dom";
 import useLocalStorage from "./services/hooks/useLocalStorage";
 
-const App: React.FC = () => {
+const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { getItem } = useLocalStorage("user");
+  const renderInstructorProfile = location.pathname.startsWith("/instructor/");
+  const renderStudentProfile = location.pathname.startsWith("/student/");
   return (
     <>
       <header>
@@ -43,13 +50,97 @@ const App: React.FC = () => {
                 Learnit
               </Typography>
               {location.pathname === "/" ? (
-                <Button color="inherit">Sign up</Button>
-              ) : null}
-              {location.pathname === "/" ? (
                 <Button color="inherit" onClick={() => navigate("/login")}>
                   Login
                 </Button>
               ) : null}
+              {location.pathname === "/" ? (
+                <Button color="inherit" onClick={() => navigate("/signup")}>
+                  Sign up
+                </Button>
+              ) : null}
+              {renderInstructorProfile && (
+                <>
+                  <Tooltip title="Library">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to="/courses"
+                      sx={{ marginLeft: "auto" }}
+                    >
+                      <LibraryBooks />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Add Course">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to="/instructor/home/coursebuilder"
+                    >
+                      <Add /> {/* Assuming you have an AddIcon imported */}
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title="My Courses">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to="/instructor/courses"
+                    >
+                      <Bookmark /> {/* Using MyCourses icon */}
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Profile">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to={`/instructor/${getItem().id}/profile`}
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+              {renderStudentProfile && (
+                <>
+                  <Box sx={{ flexGrow: 1 }} />
+                  <Box sx={{ display: "flex", alignItems: "center" }}></Box>
+                  <Tooltip title="Library">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to="/courses"
+                    >
+                      <LibraryBooks />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="My Courses">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to="/student/courses"
+                    >
+                      <Bookmark /> {/* Using MyCourses icon */}
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Profile">
+                    <IconButton
+                      size="large"
+                      color="inherit"
+                      component={Link}
+                      to={`/student/${getItem().id}/profile`}
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
             </Toolbar>
           </AppBar>
         </Box>

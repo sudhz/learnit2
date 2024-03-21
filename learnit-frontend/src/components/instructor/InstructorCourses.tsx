@@ -2,23 +2,23 @@ import { useEffect, useState } from "react";
 import CourseCard from "../CourseCard";
 import { Grid, Typography } from "@mui/material";
 import Course from "../../model/course";
-import { GetCoursesByStudentId } from "../../services/api/courseService";
+import { GetCoursesByInstructorId } from "../../services/api/courseService";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
 
-const StudentCourses = () => {
+const InstructorCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const { getItem } = useLocalStorage("user");
   const id = getItem().id;
   useEffect(() => {
-    const fetchCoursesByStudentId = async () => {
+    const fetchCoursesByInstructor = async () => {
       try {
-        const data = await GetCoursesByStudentId(id);
+        const data = await GetCoursesByInstructorId(id);
         setCourses(data);
       } catch (error) {
         console.error(`Error fetching courses: ${error}`);
       }
     };
-    fetchCoursesByStudentId();
+    fetchCoursesByInstructor();
   }, [id]);
 
   return (
@@ -30,7 +30,7 @@ const StudentCourses = () => {
         marginTop={5}
         marginBottom={2}
       >
-        Courses purchased by you
+        Courses made by you
       </Typography>
       {courses ? (
         <Grid container spacing={2}>
@@ -44,7 +44,7 @@ const StudentCourses = () => {
                 includePrice={false}
                 price={course.price}
                 createdAt={new Date(course.createdAt)}
-                showProgress={true}
+                showProgress={false}
                 progress={course.progress}
               />
             </Grid>
@@ -57,4 +57,4 @@ const StudentCourses = () => {
   );
 };
 
-export default StudentCourses;
+export default InstructorCourses;
