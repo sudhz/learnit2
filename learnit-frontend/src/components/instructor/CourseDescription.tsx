@@ -15,22 +15,23 @@ const CourseDescription: React.FC = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-       setIsLoading(true);
-       try {
-         const courseResponse = await axios.get(`http://localhost:5110/api/course/${id}`);
-         //console.log(courseResponse.data)
-         setDescription(courseResponse.data.courseDescription);
-         setCourseName(courseResponse.data.courseName);
-         setImgUrl(courseResponse.data.imgUrl);
-       } catch (error) {
-         console.error("Error fetching data:", error);
-       } finally {
-         setIsLoading(false);
-       }
+      setIsLoading(true);
+      try {
+        const courseResponse = await axios.get(
+          `http://localhost:5110/api/course/${id}`
+        );
+        console.log(courseResponse.data);
+        setDescription(courseResponse.data.courseDescription);
+        setCourseName(courseResponse.data.courseName);
+        setImgUrl(courseResponse.data.imgUrl);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
-   }, [id]);
-   
+  }, [id]);
 
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLInputElement>

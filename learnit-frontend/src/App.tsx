@@ -5,6 +5,7 @@ import {
   Toolbar,
   Typography,
   Button,
+  Stack,
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";

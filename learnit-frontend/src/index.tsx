@@ -14,6 +14,8 @@ import StudentCourses from "./components/student/StudentCourses";
 import CourseLandingPage from "./components/CourseLanding";
 import OnlinePaymentPage from "./components/OnlinePaymentPage";
 import Login from "./components/Login";
+import CourseDescription from "./components/instructor/CourseDescription";
+import CourseDiscussion from "./components/student/CourseDiscussion";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <OnlinePaymentPage />,
+      },
+      {
+        path: "course/description/:id",
+        element: <CourseDescription />,
+      },
+      {
+        path: "course/discussion/:id/:studId",
+        element: <CourseDiscussion />,
       },
     ],
   },
