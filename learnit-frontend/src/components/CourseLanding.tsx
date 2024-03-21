@@ -1,16 +1,16 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { 
-  Button, 
-  Card, 
-  Container, 
-  Typography, 
+import {
+  Button,
+  Card,
+  Container,
+  Typography,
   Grid,
-  IconButton
+  IconButton,
 } from "@mui/material";
 import { AccessTimeFilled as AccessTimeFilledIcon } from "@mui/icons-material";
 import axios from "axios";
+import FreqBoughtCourses from "./student/FreqBoughtCourses";
 interface Module {
   id: number;
   title: string;
@@ -33,7 +33,7 @@ const CourseLandingPage: React.FC = () => {
         const courseResponse = await axios.get(
           `http://localhost:5110/api/course/${id}`
         );
-        console.log(courseResponse.data)
+        console.log(courseResponse.data);
         setDescription(courseResponse.data.courseDescription);
         setName(courseResponse.data.courseName);
       } catch (error) {
@@ -122,28 +122,28 @@ const CourseLandingPage: React.FC = () => {
           >
             {description}
             <strong>Key Features:</strong>
-                  <ul>
-                    <li>
-                      Expert-led instruction: Learn from industry professionals
-                      and experienced educators.
-                    </li>
-                    <li>
-                      Flexible learning: Access courses at your own pace,
-                      anytime, and from anywhere.
-                    </li>
-                    <li>
-                      Engaging content: Interactive lessons, real-world
-                      projects, and assessments to reinforce learning.
-                    </li>
-                    <li>
-                      Comprehensive curriculum: Covering essential topics and
-                      the latest advancements in the field.
-                    </li>
-                    <li>
-                      Community support: Connect with peers, share insights, and
-                      collaborate on projects.
-                    </li>
-                  </ul> 
+            <ul>
+              <li>
+                Expert-led instruction: Learn from industry professionals and
+                experienced educators.
+              </li>
+              <li>
+                Flexible learning: Access courses at your own pace, anytime, and
+                from anywhere.
+              </li>
+              <li>
+                Engaging content: Interactive lessons, real-world projects, and
+                assessments to reinforce learning.
+              </li>
+              <li>
+                Comprehensive curriculum: Covering essential topics and the
+                latest advancements in the field.
+              </li>
+              <li>
+                Community support: Connect with peers, share insights, and
+                collaborate on projects.
+              </li>
+            </ul>
           </Typography>
         </Card>
       </div>
@@ -168,8 +168,8 @@ const CourseLandingPage: React.FC = () => {
       >
         <Typography sx={{ fontWeight: "bold", padding: "20px" }}>
           &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{" "}
-          {modules.length} MODULES &nbsp; &nbsp; &nbsp; &nbsp; 2 Hours{" "}
-          -TOTAL TIME
+          {modules.length} MODULES &nbsp; &nbsp; &nbsp; &nbsp; 2 Hours -TOTAL
+          TIME
         </Typography>
         {modules.map((module: Module) => (
           <Card
@@ -194,7 +194,7 @@ const CourseLandingPage: React.FC = () => {
                   sx={{
                     marginLeft: "auto",
                     textAlign: "justify",
-                    fontWeight:"bold"
+                    fontWeight: "bold",
                   }}
                 >
                   Duration: {module.duration}
@@ -204,48 +204,48 @@ const CourseLandingPage: React.FC = () => {
             <div>
               {module.id === 1 && (
                 <Typography variant="body1" sx={{ color: "#3498db" }}>
-                  Welcome to Module 1! In this foundational module, you'll
-                  learn the core principles and essential concepts of{" "}
-                  {name_v}. Get ready to kickstart your journey in
-                  mastering {name_v}.
+                  Welcome to Module 1! In this foundational module, you'll learn
+                  the core principles and essential concepts of {name_v}. Get
+                  ready to kickstart your journey in mastering {name_v}.
                 </Typography>
               )}
               {module.id === 2 && (
                 <Typography variant="body1" sx={{ color: "#3498db" }}>
-                  Advanced {name_v} Techniques. Delve deeper into {name_v}{" "}
-                  with advanced techniques and practical examples. Enhance
-                  your expertise and discover the intricacies of {name_v}{" "}
-                  in Module 2.
+                  Advanced {name_v} Techniques. Delve deeper into {name_v} with
+                  advanced techniques and practical examples. Enhance your
+                  expertise and discover the intricacies of {name_v} in Module
+                  2.
                 </Typography>
               )}
               {module.id === 3 && (
                 <Typography variant="body1" sx={{ color: "#3498db" }}>
-                  {name_v} Applications in Real Life. Apply your knowledge
-                  in real-world scenarios with Module 3. Gain hands-on
-                  experience and learn how to effectively utilize {name_v}{" "}
-                  in various practical applications.
+                  {name_v} Applications in Real Life. Apply your knowledge in
+                  real-world scenarios with Module 3. Gain hands-on experience
+                  and learn how to effectively utilize {name_v} in various
+                  practical applications.
                 </Typography>
               )}
               {module.id === 4 && (
                 <Typography variant="body1" sx={{ color: "#3498db" }}>
-                  Mastering {name_v} Projects. Take on advanced projects
-                  and challenges in Module 4. Strengthen your skills and
-                  showcase your proficiency in {name_v} through engaging
-                  and rewarding projects.
+                  Mastering {name_v} Projects. Take on advanced projects and
+                  challenges in Module 4. Strengthen your skills and showcase
+                  your proficiency in {name_v} through engaging and rewarding
+                  projects.
                 </Typography>
               )}
               {module.id === 5 && (
                 <Typography variant="body1" sx={{ color: "#3498db" }}>
-                  Emerging Trends in {name_v}. Stay updated with the
-                  latest trends and advancements in {name_v}. Explore
-                  cutting-edge concepts and ensure you're at the forefront
-                  of {name_v} knowledge.
+                  Emerging Trends in {name_v}. Stay updated with the latest
+                  trends and advancements in {name_v}. Explore cutting-edge
+                  concepts and ensure you're at the forefront of {name_v}{" "}
+                  knowledge.
                 </Typography>
               )}
             </div>
           </Card>
         ))}
       </Card>
+      <FreqBoughtCourses />
       <Card
         sx={{
           background: "rgba(175, 219, 245, 1)",
@@ -253,6 +253,7 @@ const CourseLandingPage: React.FC = () => {
           borderRadius: "10px",
           alignItems: "center",
           width: "fit-content",
+          marginTop: 5,
           marginLeft: "350px",
           marginBottom: "30px",
         }}

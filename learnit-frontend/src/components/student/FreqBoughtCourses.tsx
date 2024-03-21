@@ -1,24 +1,24 @@
+import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import CourseCard from "../CourseCard";
-import { Grid, Typography } from "@mui/material";
+import { GetTopCoursesByCourseId } from "../../services/api/courseService";
+import { useParams } from "react-router-dom";
 import Course from "../../model/course";
-import { GetCoursesByStudentId } from "../../services/api/courseService";
-import useLocalStorage from "../../services/hooks/useLocalStorage";
 
-const StudentCourses = () => {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const { getItem } = useLocalStorage("user");
+const FreqBoughtCourses = () => {
+  const [courses, setCourses] = useState<Course[] | null>(null);
+  const { id } = useParams();
   useEffect(() => {
-    const fetchCoursesByStudentId = async () => {
+    const fetchCourses = async () => {
       try {
-        const data = await GetCoursesByStudentId(getItem().id);
+        const data = await GetTopCoursesByCourseId(Number(id));
         setCourses(data);
       } catch (error) {
         console.error(`Error fetching courses: ${error}`);
       }
     };
-    fetchCoursesByStudentId();
-  }, [getItem().id]);
+    fetchCourses();
+  }, []);
 
   return (
     <>
@@ -29,7 +29,7 @@ const StudentCourses = () => {
         marginTop={5}
         marginBottom={2}
       >
-        Explore all the courses
+        Frequently bought courses
       </Typography>
       {courses ? (
         <Grid container spacing={2}>
@@ -42,17 +42,15 @@ const StudentCourses = () => {
                 imgUrl={course.imgUrl}
                 price={course.price}
                 createdAt={new Date(course.createdAt)}
-                showProgress={true}
-                progress={course.progress}
               />
             </Grid>
           ))}
         </Grid>
       ) : (
-        "Loading..."
+        "Loading frequently bought courses..."
       )}
     </>
   );
 };
 
-export default StudentCourses;
+export default FreqBoughtCourses;

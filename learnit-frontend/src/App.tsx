@@ -10,10 +10,12 @@ import SchoolIcon from "@mui/icons-material/School";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import { Link } from "react-router-dom";
+import useLocalStorage from "./services/hooks/useLocalStorage";
 
 const App: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { getItem } = useLocalStorage("user");
   return (
     <>
       <header>
@@ -34,15 +36,12 @@ const App: React.FC = () => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Learnit
               </Typography>
-              {location.pathname === "/" ? (
-                <Button color="inherit" onClick={() => navigate("/courses")}>
-                  Browse courses
+              {getItem() ? <Button color="inherit">Sign up</Button> : null}
+              {getItem() ? (
+                <Button color="inherit" onClick={() => navigate("/login")}>
+                  Login
                 </Button>
               ) : null}
-              <Button color="inherit">Sign up</Button>
-              <Button color="inherit" onClick={() => navigate("/login")}>
-                Login
-              </Button>
             </Toolbar>
           </AppBar>
         </Box>
