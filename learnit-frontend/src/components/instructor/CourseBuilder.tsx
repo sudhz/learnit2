@@ -237,7 +237,16 @@ const CourseBuilder: React.FC = () => {
             >
               Add Module
             </Button>
-
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={!courseId}
+              onClick={() => {
+                navigate("/instructor/coursebuilder/module");
+              }}
+            >
+              Add Assignment
+            </Button>
             <Button
               type="submit"
               variant="contained"

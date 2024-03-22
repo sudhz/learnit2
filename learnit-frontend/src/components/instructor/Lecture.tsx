@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 const Lecture: React.FC = () => {
   const [name, setName] = useState("");
@@ -31,11 +31,11 @@ const Lecture: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5110/api/lecture', {
+      const response = await axios.post("http://localhost:5110/api/lecture", {
         lectureName: name,
         lectureURL: url,
         lectureDuration: duration,
-        moduleId: 1
+        moduleId: 1,
       });
 
       // Clear input fields after successful submission

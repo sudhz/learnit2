@@ -32,6 +32,7 @@ import StartModules from "./components/student/StartModules";
 import CourseBuilder from "./components/instructor/CourseBuilder";
 import Module from "./components/instructor/Module";
 import CourseEdit from "./components/instructor/CourseEdit";
+import Lecture from "./components/instructor/Lecture";
 
 const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
       {
         path: "/instructor/coursebuilder/module",
         element: <Module />,
+      },
+      {
+        path: "/instructor/coursebuilder/module/lecture",
+        element: <Lecture />,
       },
       {
         path: "/student/home",
