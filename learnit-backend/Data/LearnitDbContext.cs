@@ -45,17 +45,14 @@ public partial class LearnitDbContext : DbContext
     {
         modelBuilder.Entity<Assignment>(entity =>
         {
-            entity.HasKey(e => e.AQuestionId).HasName("PK__assignme__621F9B45755C35B7");
-
             entity.ToTable("assignment");
-
+            entity.HasKey(e => e.AQuestionId).HasName("PK__assignment__621F9B45755C35B7");
             entity.Property(e => e.AQuestionId).HasColumnName("a_question_id");
-            entity.Property(e => e.AQuestionText)
-                .IsUnicode(false)
-                .HasColumnName("a_question_text");
+            entity.Property(e => e.ADetails).HasColumnName("a_details");
             entity.Property(e => e.CourseId).HasColumnName("course_id");
-
-            entity.HasOne(d => d.Course).WithMany(p => p.Assignments)
+            entity.Property(e => e.ADeadline).HasColumnName("a_deadline");
+            entity.HasOne(d => d.Course)
+                .WithMany(p => p.Assignments)
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_assignment_course");

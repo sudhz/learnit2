@@ -7,9 +7,11 @@ public partial class Assignment
 {
     public int AQuestionId { get; set; }
 
-    public string AQuestionText { get; set; } = null!;
+    public string? ADetails { get; set; }
 
     public int CourseId { get; set; }
 
-    public virtual Course Course { get; set; } = null!;
+    public string? ADeadline { get; set; }
+
+    public virtual Course? Course { get; set; }
 }

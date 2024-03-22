@@ -18,7 +18,6 @@ import axios from "axios";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
 import { GetInstructor } from "../../services/api/instructorService";
 
-// Define the schema for validation
 const schema = z.object({
   title: z.string().nonempty({ message: "Title is required" }),
   availability: z.enum(["always", "timeBased"]),
@@ -80,6 +79,7 @@ const CourseBuilder: React.FC = () => {
         data: newCourse,
       };
       const response = await axios.request(config);
+      console.log(newCourse);
       console.log(response.data);
       setCourseId(response.data.courseId);
       alert("Course created successfully!");
@@ -126,8 +126,7 @@ const CourseBuilder: React.FC = () => {
           variant="h5"
           sx={{ color: "primary.main", fontWeight: 600 }}
         >
-          {" "}
-          Title{" "}
+          Title
         </Typography>
         <br></br>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -240,9 +239,11 @@ const CourseBuilder: React.FC = () => {
             <Button
               variant="contained"
               color="primary"
-              disabled={!courseId}
+              
               onClick={() => {
-                navigate("/instructor/coursebuilder/module");
+                navigate("/instructor/coursebuilder/assignment", {
+                  state: { courseId: courseId },
+                });
               }}
             >
               Add Assignment

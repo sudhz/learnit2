@@ -33,6 +33,7 @@ import CourseBuilder from "./components/instructor/CourseBuilder";
 import Module from "./components/instructor/Module";
 import CourseEdit from "./components/instructor/CourseEdit";
 import Lecture from "./components/instructor/Lecture";
+import AddAssignmentForm from "./components/instructor/AddAssignmentForm";
 
 const router = createBrowserRouter([
   {
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
       {
         path: "/instructor/coursebuilder/module",
         element: <Module />,
+      },
+      {
+        path: "/instructor/coursebuilder/assignment",
+        element: <AddAssignmentForm />,
       },
       {
         path: "/instructor/coursebuilder/module/lecture",
