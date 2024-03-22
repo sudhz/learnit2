@@ -2,6 +2,6 @@ export default interface Lecture {
   lectureId: number;
   lectureName: string;
   lectureUrl: string;
-  lectureDuration: number;
+  lectureDuration: number | string;
   moduleId: number;
 }

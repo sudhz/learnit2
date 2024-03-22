@@ -48,16 +48,25 @@ const StartModules: React.FC = () => {
                   variant="contained"
                   color="primary"
                   onClick={() =>
-                    navigate(`/student/module/${module.moduleId}/quiz`)
+                    navigate(`/instructor/module/${module.moduleId}/quiz`)
                   }
                 >
-                  Start Quiz
+                  Add Quiz
                 </Button>
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={() =>
-                    navigate(`/student/module/${module.moduleId}/lectures`)
+                    navigate(`/instructor/module/${module.moduleId}/edit`)
+                  }
+                >
+                  Edit Module
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() =>
+                    navigate(`/instructor/module/${module.moduleId}/lectures`)
                   }
                 >
                   View Lectures

@@ -35,6 +35,12 @@ import CourseEdit from "./components/instructor/CourseEdit";
 import Lecture from "./components/instructor/Lecture";
 import AddAssignmentForm from "./components/instructor/AddAssignmentForm";
 import StartLecture from "./components/student/StartLecture";
+import Quizz from "./components/student/Quizz";
+import InstructorModule from "./components/instructor/InstructorModule";
+import QuizQuestionCreator from "./components/instructor/QuizQuestionCreator";
+import ModuleEdit from "./components/instructor/EditModules";
+import InstructorLecture from "./components/instructor/InstructorLecture";
+import LectureEdit from "./components/instructor/LectureEdit";
 
 const router = createBrowserRouter([
   {
@@ -82,12 +88,36 @@ const router = createBrowserRouter([
         element: <TimeTable />,
       },
       {
+        path: "/instructor/course/:id/module",
+        element: <InstructorModule />,
+      },
+      {
+        path: "/instructor/module/:id/quiz",
+        element: <QuizQuestionCreator/>,
+      },
+      {
         path: "/student/course/:id/module",
         element: <StartModules />,
       },
       {
+        path: "/instructor/module/:id/edit",
+        element: <ModuleEdit />,
+      },
+      {
+        path: "/instructor/lecture/:id/edit",
+        element: <LectureEdit />,
+      },
+      {
         path: "/student/module/:id/lectures",
         element: <StartLecture />,
+      },
+      {
+        path: "/student/module/:id/quiz",
+        element: <Quizz />,
+      },
+      {
+        path: "/instructor/module/:id/lectures",
+        element: <InstructorLecture />,
       },
       {
         path: "/login",

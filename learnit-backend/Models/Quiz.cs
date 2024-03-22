@@ -11,7 +11,7 @@ public partial class Quiz
 
     public int ModuleId { get; set; }
 
-    public virtual Module Module { get; set; } = null!;
+    public virtual Module? Module { get; set; } = null;
 
-    public virtual ICollection<QuizOption> QuizOptions { get; set; } = new List<QuizOption>();
+    public virtual ICollection<QuizOption>? QuizOptions { get; set; } = new List<QuizOption>();
 }

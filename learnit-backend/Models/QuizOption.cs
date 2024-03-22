@@ -13,5 +13,5 @@ public partial class QuizOption
 
     public bool? IsCorrect { get; set; }
 
-    public virtual Quiz QuizQuestion { get; set; } = null!;
+    public virtual Quiz? QuizQuestion { get; set; } = null!;
 }

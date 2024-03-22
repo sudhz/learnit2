@@ -1,5 +1,5 @@
 export default interface Module {
   moduleId: number;
   moduleName: string;
-  moduleDuration: Date;
+  moduleDuration?: Date | string;
 }

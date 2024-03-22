@@ -94,6 +94,9 @@ const CourseEdit = () => {
           onChange={handleChange}
           margin="normal"
         />
+        <Button variant="contained" color="primary">
+          Edit Modules
+        </Button>
         <Button type="submit" variant="contained" color="primary">
           Save
         </Button>

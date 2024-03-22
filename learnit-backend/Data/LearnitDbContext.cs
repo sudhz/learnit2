@@ -11,6 +11,23 @@ public partial class LearnitDbContext : DbContext
     {
     }
 
+    public async Task<List<QuizInfo>> GetQuizInfoAsync()
+    {
+        using (var context = new LearnitDbContext())
+        {
+            var quizInfoList = await context.Quizzes
+                .Select(q => new QuizInfo
+                {
+                    QuizQuestionId = q.QuizQuestionId,
+                    QuizQuestionText = q.QuizQuestionText,
+                    ModuleId = q.ModuleId
+                })
+                .ToListAsync();
+
+            return quizInfoList;
+        }
+    }
+
     public LearnitDbContext(DbContextOptions<LearnitDbContext> options)
         : base(options)
     {
