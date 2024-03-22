@@ -1,23 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Module from "../../model/module";
+import axios from "axios";
+import {
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  Typography,
+  Button,
+} from "@mui/material";
 
 const StartModules: React.FC = () => {
-  const moduleData = {
-    id: 1,
-    title: "Module 1: Getting Started with React",
-    description: "This module covers the basics of React programming.",
-    duration: "2 weeks",
-  };
+  const { id } = useParams<{ id: string }>();
+  const [modules, setModules] = useState<Module[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchModules = async () => {
+      try {
+        const commentResponse = await axios.get(
+          `http://localhost:5110/api/course/${id}`
+        );
+        setModules(commentResponse.data.modules);
+        console.log(commentResponse.data.modules);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+    fetchModules();
+  }, [id]);
 
   return (
-    <div>
-      <h1>{moduleData.title}</h1>
-      <p>{moduleData.description}</p>
-      <p>Duration: {moduleData.duration}</p>
-      <Link to="/student/startcourse/startmodule/lecture">
-        <button>View lecture</button>
-      </Link>
-    </div>
+    <>
+      <Typography variant="h6">Your Modules</Typography>
+      <List>
+        {modules.map((module, index) => (
+          <ListItem key={index}>
+            <ListItemText
+              primary={module.moduleName}
+              secondary={`Duration: ${module.moduleDuration}`}
+            />
+            <ListItemSecondaryAction>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() =>
+                  navigate(`/student/module/${module.moduleId}/lectures`)
+                }
+              >
+                View Lectures
+              </Button>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 

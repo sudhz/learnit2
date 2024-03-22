@@ -34,6 +34,7 @@ import Module from "./components/instructor/Module";
 import CourseEdit from "./components/instructor/CourseEdit";
 import Lecture from "./components/instructor/Lecture";
 import AddAssignmentForm from "./components/instructor/AddAssignmentForm";
+import StartLecture from "./components/student/StartLecture";
 
 const router = createBrowserRouter([
   {
@@ -81,8 +82,12 @@ const router = createBrowserRouter([
         element: <TimeTable />,
       },
       {
-        path: "/student/course/:id",
+        path: "/student/course/:id/module",
         element: <StartModules />,
+      },
+      {
+        path: "/student/module/:id/lectures",
+        element: <StartLecture />,
       },
       {
         path: "/login",

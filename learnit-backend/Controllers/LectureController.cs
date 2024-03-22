@@ -98,6 +98,21 @@ namespace learnit_backend.Controllers
             return Ok(lecture); // Return the deleted lecture
         }
 
+        [HttpGet("module/{moduleId}")]
+        public async Task<ActionResult<IEnumerable<Lecture>>> GetLecturesByModuleId(int moduleId)
+        {
+            var lectures = await _context.Lectures
+                .Where(l => l.ModuleId == moduleId)
+                .ToListAsync();
+
+            if (lectures == null || lectures.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(lectures);
+        }
+
         private bool LectureExists(int id)
         {
             return _context.Lectures.Any(e => e.LectureId == id);
