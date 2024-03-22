@@ -67,9 +67,6 @@ const InstructorProfile: React.FC = () => {
         <Typography variant="body1" sx={{ marginTop: 2 }}>
           {instructor.bio}
         </Typography>
-        <Typography variant="h6" component="div" sx={{ marginTop: 2 }}>
-          Courses:
-        </Typography>
         <Box sx={{ marginTop: 1 }}></Box>
 
         <Button

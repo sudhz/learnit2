@@ -6,5 +6,5 @@ export default interface Course {
   price: number;
   createdAt: string;
   instructorId: number;
-  progress: number;
+  progress?: number;
 }

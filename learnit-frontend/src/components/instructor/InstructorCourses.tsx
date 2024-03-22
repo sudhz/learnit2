@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import CourseCard from "../CourseCard";
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import Course from "../../model/course";
 import { GetCoursesByInstructorId } from "../../services/api/courseService";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const InstructorCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const navigate = useNavigate();
   const { getItem } = useLocalStorage("user");
   const id = getItem().id;
   useEffect(() => {
@@ -38,7 +40,7 @@ const InstructorCourses = () => {
             <Grid item key={idx} md={4} xs={8} sm={8} alignItems="center">
               <CourseCard
                 id={course.courseId}
-                linkTo={`/course/${course.courseId}`}
+                linkTo={`/instructor/course/${course.courseId}`}
                 title={course.courseName}
                 description={course.courseDescription}
                 imgUrl={course.imgUrl}

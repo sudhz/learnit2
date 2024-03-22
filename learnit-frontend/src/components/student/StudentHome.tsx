@@ -1,14 +1,4 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-} from "@mui/material";
+import { Typography, Button, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetCoursesByStudentId } from "../../services/api/courseService";
@@ -47,7 +37,6 @@ const StudentHome = () => {
             explore new hobbies, or simply learn something new, we've got you
             covered.
           </Typography>
-          {/* Resume Studying Button */}
           <Button
             variant="contained"
             color="primary"
