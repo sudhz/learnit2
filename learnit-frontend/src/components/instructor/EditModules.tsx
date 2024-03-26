@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Module from '../../model/module';
  
 const ModuleEdit: React.FC = () => {
@@ -12,7 +12,8 @@ const ModuleEdit: React.FC = () => {
     moduleName : " ",
     moduleDuration:" ",
   });
-  const { id } = useParams<{ id: string }>(); // Ensure id is of string type
+  const { id } = useParams<{ id: string }>(); 
+  const navigate = useNavigate();
  
   useEffect(() => {
     const fetchModule = async () => {
@@ -45,6 +46,7 @@ const ModuleEdit: React.FC = () => {
       await axios.put(`http://localhost:5110/api/module/${id}`,module); // Modify the URL as per your backend endpoint
       console.log('Module updated successfully:',module);
       alert('Module updated successfully')
+      navigate(-1)
       // Optionally, you can navigate to another page or show a success message here
     } catch (error) {
       console.error('Error updating Lecture:', error);

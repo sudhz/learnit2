@@ -77,5 +77,20 @@ namespace Learnit_Backend.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("course/{courseId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByCourseId(int courseId)
+        {
+            var assignments = await _context.Assignments
+                                            .Where(a => a.CourseId == courseId)
+                                            .ToListAsync();
+ 
+            if (assignments == null || assignments.Count == 0)
+            {
+                return NotFound();
+            }
+ 
+            return Ok(assignments);
+        }
     }
 }

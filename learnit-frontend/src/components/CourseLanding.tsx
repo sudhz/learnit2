@@ -303,36 +303,7 @@ const CourseLandingPage: React.FC = () => {
         ))}
       </Card>
       <FreqBoughtCourses />
-      <Card
-        sx={{
-          background: "rgba(175, 219, 245, 1)",
-          padding: "20px",
-          borderRadius: "10px",
-          alignItems: "center",
-          width: "fit-content",
-          marginTop: 5,
-          marginLeft: "350px",
-          marginBottom: "30px",
-        }}
-      >
-        <Button
-          variant="contained"
-          sx={{
-            borderRadius: "5px",
-            background: "#3498db",
-            color: "white",
-            padding: "12px",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            window.scrollTo(0, 0);
-            navigate(`/course/discussion/${id}/${getItem().id}`);
-          }}
-        >
-          COMMENT
-        </Button>
-      </Card>
-
+     
       <Dialog
         open={state.openDialog}
         onClose={() => dispatch({ type: "SET_OPEN_DIALOG", payload: false })}

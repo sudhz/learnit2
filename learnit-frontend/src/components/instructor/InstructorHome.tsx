@@ -77,7 +77,7 @@ const InstructorHome = () => {
                 <Grid item key={idx} md={4} xs={8} sm={8} alignItems="center">
                   <CourseCard
                     id={course.courseId}
-                    linkTo={`/instructor/course/${course.courseId}`}
+                    linkTo={`/instructor/course/${course.courseId}/module`}
                     title={course.courseName}
                     description={course.courseDescription}
                     imgUrl={course.imgUrl}

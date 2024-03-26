@@ -75,6 +75,24 @@ const StartModules: React.FC = () => {
             </ListItem>
           ))}
         </List>
+
+        <Stack direction="row" spacing={2} sx={{ marginTop: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate(`/instructor/course/${id}`)}
+        >
+          Edit Course
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate(`/course/description/${id}`)}
+        >
+          Change Description
+        </Button>
+      </Stack>
+
       </Box>
     </>
   );

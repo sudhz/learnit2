@@ -1,6 +1,6 @@
 export default interface Assignment {
-  AQuestionId?: number;
-  ADetails: string | null;
-  CourseId: number;
-  ADeadline: string | null;
+  aQuestionId?: number; 
+  aDetails: string | undefined;
+  courseId: number;
+  aDeadline: string | undefined;
 }

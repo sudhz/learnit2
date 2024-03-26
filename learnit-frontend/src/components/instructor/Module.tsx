@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'; // Import axios library
+import axios from "axios"; // Import axios library
 
 const Module: React.FC = () => {
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
+  const [moduleId, setModuleId] = useState<number | null>(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -23,24 +24,25 @@ const Module: React.FC = () => {
       setError("All fields are required");
       return;
     }
-    
+
     // Sending data to the server using axios
-    axios.post('http://localhost:5110/api/module', {
-      moduleName: name,
-      moduleDuration: duration,
-      lectures: [],
-      courses: []
-    })
-    .then((response) => {
-      console.log(response.data);
-      alert("module added successfully")
-      navigate("/instructor/coursebuilder/module");
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("error adding module")
-      setError("Failed to submit data");
-    });
+    axios
+      .post("http://localhost:5110/api/module", {
+        moduleName: name,
+        moduleDuration: duration,
+        lectures: [],
+        courses: [],
+      })
+      .then((response) => {
+        setModuleId(response.data.moduleId);
+        alert("module added successfully");
+        navigate("/instructor/coursebuilder/module");
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("error adding module");
+        setError("Failed to submit data");
+      });
   };
 
   return (
@@ -74,7 +76,7 @@ const Module: React.FC = () => {
             />
             <TextField
               label="Duration"
-              type="text" 
+              type="text"
               value={duration}
               onChange={handleDurationChange}
             />
@@ -85,17 +87,21 @@ const Module: React.FC = () => {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => navigate("/instructor/coursebuilder/module/lecture")}
+              onClick={() =>
+                navigate(
+                  "/instructor/coursebuilder/module/lecture" , {state: {moduleId: moduleId}}
+                )
+              }
             >
               Add Lecture
             </Button>
-            <Button
+            {/* <Button
               variant="outlined"
               color="primary"
               onClick={() => navigate("/quiz")}
             >
               Add quiz to your module
-            </Button>
+            </Button> */}
           </Stack>
         </form>
       </Box>

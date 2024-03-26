@@ -13,19 +13,20 @@ import {
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Comment from "../../model/comment";
-
+ 
 const CourseDiscussion: React.FC = () => {
   const { id } = useParams();
   const { studId } = useParams();
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
-
+  const [courseName, setCourseName] = useState("");
+ 
   type addedComment = {
     commentBody: string;
     courseId: number;
     studentId: number;
   };
-
+ 
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -33,13 +34,18 @@ const CourseDiscussion: React.FC = () => {
           `http://localhost:5110/api/comment/course/${id}`
         );
         setComments(commentResponse.data);
+ 
+        const courseResponse = await axios.get(
+          `http://localhost:5110/api/course/${id}`
+        );
+        setCourseName(courseResponse.data.courseName);
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
     };
     fetchComments();
   }, [id, studId]);
-
+ 
   const addComment = async () => {
     try {
       const commentPayload: addedComment = {
@@ -48,24 +54,24 @@ const CourseDiscussion: React.FC = () => {
         studentId: Number(studId),
       };
       console.log(commentPayload);
-
+ 
       const response = await axios.post(
         `http://localhost:5110/api/comment/course/${id}`,
         commentPayload,
         { headers: { "Content-Type": "application/json" } }
       );
       console.log(response.data);
-
+ 
       const newCommentData = response.data;
       setComments((prevComments) => [...prevComments, newCommentData]);
-
+ 
       setNewComment("");
       window.location.reload();
     } catch (error) {
       console.error("Error adding comment:", error);
     }
   };
-
+ 
   return (
     <Box display="flex" height="100vh" width="100%" gap={2} pt={2}>
       <Box width="60%" sx={{ padding: 2 }}>
@@ -75,6 +81,9 @@ const CourseDiscussion: React.FC = () => {
             addComment();
           }}
         >
+          <Typography pb={2} variant="h5">
+           {courseName}
+          </Typography>
           <Typography variant="h6">
             Enter the comments for the course
           </Typography>
@@ -93,11 +102,11 @@ const CourseDiscussion: React.FC = () => {
             Add Comment
           </Button>
         </form>
-
+ 
         <Typography variant="h6" gutterBottom sx={{ marginTop: 2 }}>
           Comments
         </Typography>
-
+ 
         <List>
           {comments.map((comment) => (
             <ListItem key={comment.commentId}>
@@ -112,5 +121,5 @@ const CourseDiscussion: React.FC = () => {
     </Box>
   );
 };
-
+ 
 export default CourseDiscussion;

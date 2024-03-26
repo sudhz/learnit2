@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography, Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Lecture: React.FC = () => {
@@ -9,6 +9,7 @@ const Lecture: React.FC = () => {
   const [duration, setDuration] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -35,18 +36,15 @@ const Lecture: React.FC = () => {
         lectureName: name,
         lectureURL: url,
         lectureDuration: duration,
-        moduleId: 1,
+        moduleId: location.state.moduleId,
       });
-
-      // Clear input fields after successful submission
+      console.log(response);
       setName("");
       setUrl("");
       setDuration("");
 
-      // Show success alert
       alert("Lecture successfully added");
 
-      // Navigate to the desired page
       navigate("/instructor/coursebuilder/module");
     } catch (error) {
       // Show error alert

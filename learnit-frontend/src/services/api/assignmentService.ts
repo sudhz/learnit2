@@ -19,3 +19,20 @@ export const addAssignment = async (
     }
   }
 };
+
+export const getAssignmentByCourseId = async (courseId: number): Promise<Assignment[]> => {
+  try {
+    const response: AxiosResponse<Assignment[]> = await axios.get<Assignment[]>(
+      `http://localhost:5110/api/assignment/course/${courseId}`
+    );
+    console.log('Assignments fetched successfully');
+ 
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("Unknown error");
+    }
+  }
+};

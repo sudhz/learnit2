@@ -41,6 +41,7 @@ import QuizQuestionCreator from "./components/instructor/QuizQuestionCreator";
 import ModuleEdit from "./components/instructor/EditModules";
 import InstructorLecture from "./components/instructor/InstructorLecture";
 import LectureEdit from "./components/instructor/LectureEdit";
+import StudentAssignment from "./components/student/StudentAssignment";
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
       {
         path: "/student/module/:id/lectures",
         element: <StartLecture />,
+      },
+      {
+          path:"/student/course/assignment/:id",
+          element: <StudentAssignment />,
       },
       {
         path: "/student/module/:id/quiz",

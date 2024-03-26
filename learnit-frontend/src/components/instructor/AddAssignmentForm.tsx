@@ -40,9 +40,9 @@ const AddAssignmentForm: React.FC = () => {
       return;
     }
     const requestData = {
-      ADetails: assignmentDetails,
-      CourseId: courseId,
-      ADeadline: deadline,
+      aDetails: assignmentDetails,
+      courseId: courseId,
+      aDeadline: deadline,
     };
 
     console.log("Request Body:", requestData);

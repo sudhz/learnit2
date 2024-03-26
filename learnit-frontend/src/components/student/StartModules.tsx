@@ -11,11 +11,13 @@ import {
   Box,
   Stack,
 } from "@mui/material";
+import useLocalStorage from "../../services/hooks/useLocalStorage";
 
 const StartModules: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [modules, setModules] = useState<Module[]>([]);
   const navigate = useNavigate();
+  const { getItem } = useLocalStorage("user");
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -66,6 +68,26 @@ const StartModules: React.FC = () => {
             </ListItem>
           ))}
         </List>
+        <Button
+          variant="contained"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            navigate(`/course/discussion/${id}/${getItem().id}`);
+          }}
+        >
+          COMMENT
+        </Button>
+        <br></br>
+        <br></br>
+        <Button
+          variant="contained"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            navigate(`/student/course/assignment/${id}`);
+          }}
+        >
+          View Assignment
+        </Button>
       </Box>
     </>
   );
