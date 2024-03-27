@@ -10,7 +10,7 @@ import {
   Grid,
   InputLabel,
 } from "@mui/material";
-import { addAssignment } from "../../services/api/assignmentService";
+import { AddAssignment } from "../../services/api/assignmentService";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const AddAssignmentForm: React.FC = () => {
@@ -48,7 +48,7 @@ const AddAssignmentForm: React.FC = () => {
     console.log("Request Body:", requestData);
 
     try {
-      await addAssignment(requestData);
+      await AddAssignment(requestData);
       alert("Assignment added successfully");
       navigate(-1);
     } catch (error) {

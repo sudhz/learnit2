@@ -1,30 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getAssignmentByCourseId } from '../../services/api/assignmentService';
-import Assignment from '../../model/assignment';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
- 
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { GetAssignmentByCourseId } from "../../services/api/assignmentService";
+import Assignment from "../../model/assignment";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+
 const StudentAssignment = () => {
- const [assignments, setAssignments] = useState<Assignment[]>([]);
- const { id } = useParams<{ id: string }>();
- 
- useEffect(() => {
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const assignmentsData = await getAssignmentByCourseId(Number(id));
+        const assignmentsData = await GetAssignmentByCourseId(Number(id));
         setAssignments(assignmentsData);
         console.log(assignmentsData);
       } catch (error) {
-        console.error('Failed to fetch assignments:', error);
+        console.error("Failed to fetch assignments:", error);
       }
     };
- 
+
     if (id) {
       fetchAssignments();
     }
- }, [id]);
- 
- return (
+  }, [id]);
+
+  return (
     <div>
       <h2>Assignments</h2>
       <TableContainer component={Paper}>
@@ -46,7 +54,7 @@ const StudentAssignment = () => {
         </Table>
       </TableContainer>
     </div>
- );
+  );
 };
- 
+
 export default StudentAssignment;

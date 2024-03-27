@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import Instructor from "../../model/instructor";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const AddInstructor = async (
   instructor: Instructor
@@ -26,25 +27,17 @@ export const AddInstructor = async (
   }
 };
 
-export const GetInstructors = async (): Promise<Instructor[]> => {
-  try {
-    const response: AxiosResponse<Instructor[]> = await axios.get(
-      "http://localhost:5110/api/instructor"
-    );
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Unknown error");
-    }
-  }
-};
-
 export const GetInstructor = async (id: number): Promise<Instructor> => {
   try {
+    const { getItem } = useLocalStorage("user");
+    const token = getItem().token;
     const response: AxiosResponse<Instructor> = await axios.get(
-      `http://localhost:5110/api/instructor/${id}`
+      `http://localhost:5110/api/instructor/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -58,12 +51,15 @@ export const GetInstructor = async (id: number): Promise<Instructor> => {
 
 export const UpdateInstructor = async (newDetails: Instructor) => {
   try {
+    const { getItem } = useLocalStorage("user");
+    const token = getItem().token;
     const data = JSON.stringify(newDetails);
     const config = {
       method: "put",
       url: `http://localhost:5110/api/instructor/${newDetails.instructorId}`,
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
