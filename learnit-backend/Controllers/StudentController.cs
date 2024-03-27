@@ -1,23 +1,40 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using System.Text.Json;
 using learnit_backend.Data;
 using learnit_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace learnit_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    [Authorize]
+    public class StudentController(LearnitDbContext context, IConfiguration config) : ControllerBase
     {
-        private readonly LearnitDbContext _context;
+        private readonly LearnitDbContext _context = context;
+        private readonly IConfiguration _config = config;
 
-         public StudentController(LearnitDbContext context)
+        private string GenerateJwt()
         {
-            _context = context;
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
+              _config["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+            return token;
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<Student>> CreateStudent(Student student)
         {
             _context.Students.Add(student);
@@ -106,6 +123,7 @@ namespace learnit_backend.Controllers
             return Ok(studentCourses);
         }
 
+        [AllowAnonymous]
         [HttpPost("auth")]
         public async Task<IActionResult> Auth([FromBody] JsonElement payload)
         {
@@ -120,7 +138,9 @@ namespace learnit_backend.Controllers
                     {
                         if (student.Password == password)
                         {
-                            return Ok(new { id = student.StudentId });
+
+                            string token = GenerateJwt();
+                            return Ok(new { id = student.StudentId, token });
                         }
                         else
                         {

@@ -47,7 +47,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const id =
+      const auth =
         data.role === "instructor"
           ? await AuthInstructor(data.email, data.password)
           : await AuthStudent(data.email, data.password);
@@ -57,7 +57,7 @@ const Login = () => {
           replace: true,
         }
       );
-      setItem({ id: id.id, role: data.role });
+      setItem({ id: auth.id, role: data.role, token: auth.token });
       alert("Logged in successfully!");
     } catch (error) {
       alert("Email or password is invalid!");

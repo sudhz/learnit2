@@ -1,23 +1,17 @@
 using learnit_backend.Data;
 using learnit_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace learnit_backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ModuleController : ControllerBase
+    [Authorize]
+    public class ModuleController(LearnitDbContext context) : ControllerBase
     {
-        private readonly LearnitDbContext _context;
-
-        public ModuleController(LearnitDbContext context)
-        {
-            _context = context;
-        }
+        private readonly LearnitDbContext _context = context;
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Module>>> GetModules()

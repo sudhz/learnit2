@@ -2,19 +2,16 @@
 using learnit_backend.Data;
 using learnit_backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace learnit_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionController : ControllerBase
+    [Authorize]
+    public class QuestionController(LearnitDbContext context) : ControllerBase
     {
-        private readonly LearnitDbContext _context;
-
-        public QuestionController(LearnitDbContext context)
-        {
-            _context = context;
-        }
+        private readonly LearnitDbContext _context = context;
 
         [HttpGet]
         public async Task<IActionResult> GetQuizInfo()

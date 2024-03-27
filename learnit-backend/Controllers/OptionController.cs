@@ -2,19 +2,16 @@
 using learnit_backend.Data;
 using learnit_backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace learnit_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OptionController : ControllerBase
+    [Authorize]
+    public class OptionController(LearnitDbContext context) : ControllerBase
     {
-        private readonly LearnitDbContext _context;
-
-        public OptionController(LearnitDbContext context)
-        {
-            _context = context;
-        }
+        private readonly LearnitDbContext _context = context;
 
         [HttpGet("{quizQuestionId}")]
         public async Task<ActionResult<IEnumerable<QuizOption>>> GetQuizOptionsByQuestionId(int quizQuestionId)

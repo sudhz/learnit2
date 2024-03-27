@@ -1,5 +1,6 @@
 ﻿using learnit_backend.Data;
 using learnit_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,14 +8,10 @@ namespace Learnit_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AssignmentController : ControllerBase
+    [Authorize]
+    public class AssignmentController(LearnitDbContext context) : ControllerBase
     {
-        private readonly LearnitDbContext _context;
-
-        public AssignmentController(LearnitDbContext context)
-        {
-            _context = context;
-        }
+        private readonly LearnitDbContext _context = context;
 
         [HttpPost]
         public async Task<ActionResult<Assignment>> Post(Assignment assignment)

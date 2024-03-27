@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import Student from "../../model/student";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const AddStudent = async (student: Student): Promise<Student> => {
   try {
@@ -24,25 +25,17 @@ export const AddStudent = async (student: Student): Promise<Student> => {
   }
 };
 
-export const GetStudents = async () => {
-  try {
-    const response: AxiosResponse<Student[]> = await axios.get(
-      "http://localhost:5110/api/student"
-    );
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Unknown error");
-    }
-  }
-};
-
 export const GetStudent = async (id: number): Promise<Student> => {
   try {
+    const { getItem } = useLocalStorage("user");
+    const token = getItem().token;
     const response: AxiosResponse<Student> = await axios.get(
-      `http://localhost:5110/api/student/${id}`
+      `http://localhost:5110/api/student/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -56,12 +49,15 @@ export const GetStudent = async (id: number): Promise<Student> => {
 
 export const UpdateStudent = async (newDetails: Student) => {
   try {
+    const { getItem } = useLocalStorage("user");
+    const token = getItem().token;
     const data = JSON.stringify(newDetails);
     const config = {
       method: "put",
       url: `http://localhost:5110/api/student/${newDetails.studentId}`,
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };

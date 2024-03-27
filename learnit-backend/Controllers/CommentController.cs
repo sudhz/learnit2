@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using learnit_backend.Data;
 using learnit_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,14 +8,10 @@ namespace Learnit_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController : ControllerBase
+    [Authorize]
+    public class CommentController(LearnitDbContext context) : ControllerBase
     {
-        private readonly LearnitDbContext _context;
-
-        public CommentController(LearnitDbContext context)
-        {
-            _context = context;
-        }
+        private readonly LearnitDbContext _context = context;
 
         // GET: api/Comment
         [HttpGet]

@@ -98,7 +98,7 @@ const App = () => {
                       size="large"
                       color="inherit"
                       component={Link}
-                      to={`/instructor/${getItem().id}/profile`}
+                      to={`/instructor/${getItem()?.id}/profile`}
                     >
                       <AccountCircle />
                     </IconButton>
@@ -134,7 +134,7 @@ const App = () => {
                       size="large"
                       color="inherit"
                       component={Link}
-                      to={`/student/${getItem().id}/profile`}
+                      to={`/student/${getItem()?.id}/profile`}
                     >
                       <AccountCircle />
                     </IconButton>
