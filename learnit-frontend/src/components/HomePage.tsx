@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
             component="img"
             height="100%"
             // image="https://source.unsplash.com/random"
-            image="https://logodix.com/logo/2149417.png"
+            image="https://gcdnb.pbrd.co/images/KBJVKYikXoQ8.png?o=1"
             alt="Course Image"
             sx={{
               height: { xs: "50vh", md: "50vh" },

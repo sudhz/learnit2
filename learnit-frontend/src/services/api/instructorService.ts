@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import Instructor from "../../model/instructor";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useCookies from "../hooks/useCookies";
 
 export const AddInstructor = async (
   instructor: Instructor
@@ -20,17 +20,17 @@ export const AddInstructor = async (
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.message);
+      throw new AxiosError(error.response?.data.message);
     } else {
-      throw new Error("Unknown error");
+      throw new AxiosError("Unknown error");
     }
   }
 };
 
 export const GetInstructor = async (id: number): Promise<Instructor> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Instructor> = await axios.get(
       `http://localhost:5110/api/instructor/${id}`,
       {
@@ -51,8 +51,8 @@ export const GetInstructor = async (id: number): Promise<Instructor> => {
 
 export const UpdateInstructor = async (newDetails: Instructor) => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const data = JSON.stringify(newDetails);
     const config = {
       method: "put",
@@ -93,17 +93,9 @@ export const AuthInstructor = async (email: string, password: string) => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      if (error.response?.status === 404) {
-        throw new Error("email not found");
-      } else if (error.status === 400) {
-        throw new Error("email or password is invalid");
-      } else if (error.status === 401) {
-        throw new Error("wrong password");
-      } else {
-        throw new Error(error.message);
-      }
+      throw new AxiosError(error.response?.data.message);
     } else {
-      throw new Error("Unknown error");
+      throw new AxiosError("Unknown error");
     }
   }
 };

@@ -16,6 +16,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import { Link } from "react-router-dom";
 import useLocalStorage from "./services/hooks/useLocalStorage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   const location = useLocation();
@@ -153,7 +154,9 @@ const App = () => {
             marginRight: { xs: 1, sm: 2, md: 10, lg: 10 },
           }}
         >
-          <Outlet />
+          <ProtectedRoute>
+            <Outlet />
+          </ProtectedRoute>
         </Box>
       </main>
       <footer>

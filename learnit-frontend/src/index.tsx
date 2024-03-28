@@ -16,12 +16,9 @@ import OnlinePaymentPage from "./components/OnlinePaymentPage";
 import Login from "./components/Login";
 import StudentHome from "./components/student/StudentHome";
 import InstructorHome from "./components/instructor/InstructorHome";
-import ProtectedRoute from "./components/ProtectedRoute";
 import CourseDescription from "./components/instructor/CourseDescription";
 import CourseDiscussion from "./components/student/CourseDiscussion";
-import SignUp from "./components/SignUp";
-import InstructorSignup from "./components/instructor/InstructorSignup";
-import StudentSignup from "./components/student/StudentSignup";
+import SignUp from "./components/Signup";
 import InstructorCourses from "./components/instructor/InstructorCourses";
 import InstructorProfile from "./components/instructor/InstructorProfile";
 import UpdateInstructorProfile from "./components/instructor/UpdateInstructorProfile";
@@ -61,20 +58,12 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/instructor/signup",
-        element: <InstructorSignup />,
-      },
-      {
         path: "/instructor/:id/profile",
         element: <InstructorProfile />,
       },
       {
         path: "/instructor/:id/profile/edit",
         element: <UpdateInstructorProfile />,
-      },
-      {
-        path: "/student/signup",
-        element: <StudentSignup />,
       },
       {
         path: "/student/:id/profile",
@@ -94,7 +83,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/instructor/module/:id/quiz",
-        element: <QuizQuestionCreator/>,
+        element: <QuizQuestionCreator />,
       },
       {
         path: "/student/course/:id/module",
@@ -113,8 +102,8 @@ const router = createBrowserRouter([
         element: <StartLecture />,
       },
       {
-          path:"/student/course/assignment/:id",
-          element: <StudentAssignment />,
+        path: "/student/course/assignment/:id",
+        element: <StudentAssignment />,
       },
       {
         path: "/student/module/:id/quiz",
@@ -158,19 +147,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/student/home",
-        element: (
-          <ProtectedRoute>
-            <StudentHome />
-          </ProtectedRoute>
-        ),
+        element: <StudentHome />,
       },
       {
         path: "/instructor/home",
-        element: (
-          <ProtectedRoute>
-            <InstructorHome />
-          </ProtectedRoute>
-        ),
+        element: <InstructorHome />,
       },
       {
         path: "/course/:id",

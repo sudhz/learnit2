@@ -10,7 +10,7 @@ const StudentHome = () => {
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
   const { getItem } = useLocalStorage("user");
-  const id = getItem().id;
+  const id = getItem()?.id;
   useEffect(() => {
     const fetchCoursesByStudentId = async () => {
       try {
@@ -49,7 +49,7 @@ const StudentHome = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <img
-            src="https://logodix.com/logo/2149417.png"
+            src="https://gcdnb.pbrd.co/images/KBJVKYikXoQ8.png?o=1"
             alt="Welcome Image"
             style={{ width: "60%", height: "auto" }}
           />

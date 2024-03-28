@@ -5,10 +5,12 @@ import Student from "../../model/student";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { GetStudent } from "../../services/api/studentService";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
+import useCookies from "../../services/hooks/useCookies";
 
 const StudentProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { removeItem } = useLocalStorage("user");
+  const { deleteCookie } = useCookies();
   const [student, setStudent] = useState<Partial<Student>>({});
   useEffect(() => {
     try {
@@ -29,6 +31,7 @@ const StudentProfile: React.FC = () => {
 
   const handleLogout = () => {
     removeItem();
+    deleteCookie("token");
     navigate("/");
   };
   const handleEditButton = () => {

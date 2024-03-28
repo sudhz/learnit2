@@ -5,6 +5,7 @@ using learnit_backend.Data;
 using learnit_backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -37,8 +38,19 @@ namespace learnit_backend.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<Student>> CreateStudent(Student student)
         {
-            _context.Students.Add(student);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 2627)
+            {
+                return BadRequest(new { message = "Email address is already in use." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
             return CreatedAtAction(nameof(GetStudent), new { id = student.StudentId }, student);
         }
 

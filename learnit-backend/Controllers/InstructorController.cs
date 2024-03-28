@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Microsoft.Data.SqlClient;
 
 namespace Learnit_Backend.Controllers
 {
@@ -36,8 +37,19 @@ namespace Learnit_Backend.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<Instructor>> CreateInstructor(Instructor instructor)
         {
-            _context.Instructors.Add(instructor);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Instructors.Add(instructor);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 2627)
+            {
+                return BadRequest(new { message = "Email address is already in use." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
             return CreatedAtAction(nameof(GetInstructors), new { id = instructor.InstructorId }, instructor);
         }
 
@@ -124,23 +136,23 @@ namespace Learnit_Backend.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(new { message = e.Message});
+                return BadRequest(new { message = e.Message });
             }
 
 
         }
 
         [HttpGet("{instructorId}/courses")]
-        public async Task<IActionResult> GetStudentCourses(int instructorId)
+        public async Task<IActionResult> GetInstructorCourses(int instructorId)
         {
-            var student = await _context.Students.FindAsync(instructorId);
+            var instructor = await _context.Instructors.FindAsync(instructorId);
 
-            if (student == null)
+            if (instructor == null)
             {
-                return NotFound("There are no courses made by you.");
+                return NotFound("No instructor with that id exists.");
             }
 
-            var studentCourses = await _context.Courses
+            var instructorCourses = await _context.Courses
                 .Where(c => c.InstructorId == instructorId)
                 .Select(c => new
                 {
@@ -153,7 +165,7 @@ namespace Learnit_Backend.Controllers
                 })
                 .ToListAsync();
 
-            return Ok(studentCourses);
+            return Ok(instructorCourses);
         }
     }
 }

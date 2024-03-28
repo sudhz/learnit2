@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import QuizOption from "../../model/quiz_options";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useCookies from "../hooks/useCookies";
 
 export const GetQuizOptionsByQuestionId = async (
   quizQuestionId: number
 ): Promise<QuizOption[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<QuizOption[]> = await axios.get(
       `http://localhost:5110/api/option/${quizQuestionId}`,
       {
@@ -30,8 +30,8 @@ export const GetQuizByModule_QT = async (
   quizQuestionId: number
 ): Promise<QuizOption[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<QuizOption[]> = await axios.get(
       `http://localhost:5110/api/option/${quizQuestionId}`,
       {
@@ -54,8 +54,8 @@ export const CreateQuizOptions = async (
   quizOptions: QuizOption[]
 ): Promise<QuizOption[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<QuizOption[]> = await axios.post(
       "http://localhost:5110/api/option",
       quizOptions,

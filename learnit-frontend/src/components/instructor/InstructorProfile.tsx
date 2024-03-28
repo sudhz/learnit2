@@ -12,9 +12,11 @@ import { GetInstructor } from "../../services/api/instructorService";
 import Instructor from "../../model/instructor";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import useLocalStorage from "../../services/hooks/useLocalStorage";
+import useCookies from "../../services/hooks/useCookies";
 const InstructorProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { removeItem } = useLocalStorage("user");
+  const { deleteCookie } = useCookies();
   const [instructor, setinstructor] = useState<Partial<Instructor>>({});
   useEffect(() => {
     try {
@@ -35,6 +37,7 @@ const InstructorProfile: React.FC = () => {
 
   const handleLogout = () => {
     removeItem();
+    deleteCookie("token");
     navigate("/");
   };
   const handleEditButton = () => {

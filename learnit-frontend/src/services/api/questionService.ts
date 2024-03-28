@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import Quiz from "../../model/quiz";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useCookies from "../hooks/useCookies";
 
 export const GetQuizzesByModuleId = async (
   moduleId: number
 ): Promise<Quiz[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Quiz[]> = await axios.get(
       `http://localhost:5110/api/quiz/${moduleId}`,
       {
@@ -28,8 +28,8 @@ export const GetQuizzesByModuleId = async (
 
 export const AddQuizQuestion = async (quizInfo: Quiz): Promise<Quiz> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Quiz> = await axios.post(
       "http://localhost:5110/api/question",
       quizInfo,

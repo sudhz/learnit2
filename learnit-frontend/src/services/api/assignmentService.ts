@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import Assignment from "../../model/assignment";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useCookies from "../hooks/useCookies";
 
 export const AddAssignment = async (
   newAssignmentData: Assignment
 ): Promise<void> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<void> = await axios.post(
       "http://localhost:5110/api/assignment",
       newAssignmentData,
@@ -17,7 +17,6 @@ export const AddAssignment = async (
         },
       }
     );
-    console.log("Assignment added successfully");
     alert("Assignment added successfully");
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -32,8 +31,8 @@ export const GetAssignmentByCourseId = async (
   courseId: number
 ): Promise<Assignment[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Assignment[]> = await axios.get<Assignment[]>(
       `http://localhost:5110/api/assignment/course/${courseId}`,
       {

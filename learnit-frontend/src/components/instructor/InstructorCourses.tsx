@@ -10,7 +10,7 @@ const InstructorCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const navigate = useNavigate();
   const { getItem } = useLocalStorage("user");
-  const id = getItem().id;
+  const id = getItem()?.id;
   useEffect(() => {
     const fetchCoursesByInstructor = async () => {
       try {

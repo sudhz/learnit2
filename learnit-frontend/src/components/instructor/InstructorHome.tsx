@@ -1,14 +1,4 @@
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-} from "@mui/material";
+import { Typography, Button, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetCoursesByInstructorId } from "../../services/api/courseService";
@@ -17,10 +7,10 @@ import useLocalStorage from "../../services/hooks/useLocalStorage";
 import CourseCard from "../CourseCard";
 
 const InstructorHome = () => {
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<Course[] | null>(null);
   const navigate = useNavigate();
   const { getItem } = useLocalStorage("user");
-  const id = getItem().id;
+  const id = getItem()?.id;
   useEffect(() => {
     const fetchCoursesByInstructor = async () => {
       try {
@@ -61,47 +51,55 @@ const InstructorHome = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <img
-            src="https://logodix.com/logo/2149417.png"
+            src="https://gcdnb.pbrd.co/images/KBJVKYikXoQ8.png?o=1"
             alt="Welcome Image"
             style={{ width: "60%", height: "auto" }}
           />
         </Grid>
-        {/* Lower Half */}
         <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom>
-            My Courses
-          </Typography>
-          {courses ? (
-            <Grid container spacing={2}>
-              {courses.slice(0, 3).map((course, idx) => (
-                <Grid item key={idx} md={4} xs={8} sm={8} alignItems="center">
-                  <CourseCard
-                    id={course.courseId}
-                    linkTo={`/instructor/course/${course.courseId}/module`}
-                    title={course.courseName}
-                    description={course.courseDescription}
-                    imgUrl={course.imgUrl}
-                    includePrice={false}
-                    price={course.price}
-                    createdAt={new Date(course.createdAt)}
-                    showProgress={false}
-                    progress={course.progress}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          ) : (
-            "Loading the courses..."
-          )}
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            style={{ marginTop: "20px" }}
-            onClick={() => navigate("/instructor/courses")}
-          >
-            Show More
-          </Button>
+          {courses
+            ? !!courses.length && (
+                <>
+                  <Typography variant="h5" gutterBottom>
+                    My Courses
+                  </Typography>
+                  <Grid container spacing={2}>
+                    {courses.slice(0, 3).map((course, idx) => (
+                      <Grid
+                        item
+                        key={idx}
+                        md={4}
+                        xs={8}
+                        sm={8}
+                        alignItems="center"
+                      >
+                        <CourseCard
+                          id={course.courseId}
+                          linkTo={`/instructor/course/${course.courseId}/module`}
+                          title={course.courseName}
+                          description={course.courseDescription}
+                          imgUrl={course.imgUrl}
+                          includePrice={false}
+                          price={course.price}
+                          createdAt={new Date(course.createdAt)}
+                          showProgress={false}
+                          progress={course.progress}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="large"
+                    style={{ marginTop: "20px" }}
+                    onClick={() => navigate("/instructor/courses")}
+                  >
+                    Show More
+                  </Button>
+                </>
+              )
+            : "Loading the courses..."}
         </Grid>
       </Grid>
     </Container>

@@ -3,9 +3,12 @@ import CourseCard from "./CourseCard";
 import { Grid, Typography } from "@mui/material";
 import Course from "../model/course";
 import { GetCourses } from "../services/api/courseService";
+import useLocalStorage from "../services/hooks/useLocalStorage";
 
 const CourseCatalog = () => {
   const [courses, setCourses] = useState<Course[] | null>(null);
+  const { getItem } = useLocalStorage("user");
+  const role = getItem()?.role;
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -39,7 +42,7 @@ const CourseCatalog = () => {
                 title={course.courseName}
                 description={course.courseDescription}
                 imgUrl={course.imgUrl}
-                includePrice={true}
+                includePrice={role === "student"}
                 price={course.price}
                 createdAt={new Date(course.createdAt)}
               />

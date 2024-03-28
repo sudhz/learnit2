@@ -8,7 +8,7 @@ import useLocalStorage from "../../services/hooks/useLocalStorage";
 const StudentCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const { getItem } = useLocalStorage("user");
-  const id = getItem().id;
+  const id = getItem()?.id;
   useEffect(() => {
     const fetchCoursesByStudentId = async () => {
       try {

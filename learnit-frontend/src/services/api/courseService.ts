@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import Course from "../../model/course";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useCookies from "../hooks/useCookies";
 
 export const GetCourses = async (): Promise<Course[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Course[]> = await axios.get(
       "http://localhost:5110/api/course",
       {
@@ -26,8 +26,8 @@ export const GetCourses = async (): Promise<Course[]> => {
 
 export const GetCoursesByStudentId = async (id: number): Promise<Course[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Course[]> = await axios.get(
       `http://localhost:5110/api/student/${id}/courses`,
       {
@@ -50,8 +50,8 @@ export const GetCoursesByInstructorId = async (
   id: number
 ): Promise<Course[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Course[]> = await axios.get(
       `http://localhost:5110/api/instructor/${id}/courses`,
       {
@@ -74,8 +74,8 @@ export const GetTopCoursesByCourseId = async (
   id: number
 ): Promise<Course[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Course[]> = await axios.get(
       `http://localhost:5110/api/course/${id}/top-courses`,
       {
@@ -96,8 +96,8 @@ export const GetTopCoursesByCourseId = async (
 
 export const GetTimeTable = async (id: number): Promise<Course[]> => {
   try {
-    const { getItem } = useLocalStorage("user");
-    const token = getItem().token;
+    const { getCookie } = useCookies();
+    const token = getCookie("token");
     const response: AxiosResponse<Course[]> = await axios.get(
       `http://localhost:5110/api/student/${id}/courses`,
       {
