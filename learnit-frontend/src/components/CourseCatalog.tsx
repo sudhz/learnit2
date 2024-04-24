@@ -31,6 +31,7 @@ const CourseCatalog = () => {
         marginBottom={2}
       >
         Explore all the courses
+        anusha
       </Typography>
       {courses ? (
         <Grid container spacing={2}>
