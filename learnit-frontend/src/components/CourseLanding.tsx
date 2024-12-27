@@ -155,6 +155,8 @@ const CourseLandingPage: React.FC = () => {
           sx={{ color: "#3498db", fontWeight: "bold" }}
         >
           Course Descripton
+
+          task1 statsh
         </Typography>
         <Card
           sx={{
